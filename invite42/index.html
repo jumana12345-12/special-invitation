@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة مشروع صحتنا</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- استيراد خط Inter للأرقام الإنجليزية (الساعة) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            height: 100vh;
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- إطار الآيفون --- */
+        .iphone-frame {
+            position: relative;
+            width: 375px;
+            height: 812px;
+            background: #1c1c1e;
+            border-radius: 50px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 
+                        0 0 0 4px #3a3a3c inset;
+            padding: 12px;
+            z-index: 1;
+        }
+
+        .notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 32px;
+            background: #1c1c1e;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 20;
+        }
+
+        .btn-side { position: absolute; background: #2c2c2e; border-radius: 4px; box-shadow: inset -1px 0 2px rgba(0,0,0,0.5); }
+        .power-btn { top: 200px; right: -6px; width: 6px; height: 60px; }
+        .vol-up { top: 180px; left: -6px; width: 6px; height: 40px; }
+        .vol-down { top: 230px; left: -6px; width: 6px; height: 40px; }
+        .mute-sw { top: 130px; left: -6px; width: 6px; height: 25px; }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+            mask-image: -webkit-radial-gradient(white, black);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+
+        /* --- الحاوية الداخلية والخلفية --- */
+        .app-container {
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        .app-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.15);
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+        
+        .app-container.app-open::before {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* --- شريط الحالة (Status Bar) --- */
+        .status-bar {
+            position: absolute;
+            top: 14px;
+            left: 0;
+            width: 100%;
+            padding: 0 26px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 14px;
+            z-index: 25;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .status-right {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        /* --- شاشة القفل --- */
+        .lock-screen-header {
+            position: relative;
+            z-index: 5;
+            margin-top: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .lock-date {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .lock-time {
+            font-family: 'Inter', sans-serif;
+            font-size: 82px;
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        /* --- عنصر الإشعار --- */
+        .notification-widget {
+            position: relative;
+            z-index: 10;
+            width: 92%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.75); 
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 20px;
+            padding: 14px;
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: slideInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            transition: all 0.3s ease;
+        }
+        
+        .notif-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .app-info { display: flex; align-items: center; gap: 8px; }
+        
+        .app-icon {
+            width: 20px; height: 20px;
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            border-radius: 5px;
+            display: flex; justify-content: center; align-items: center;
+            color: white; font-size: 10px;
+        }
+        
+        .app-name { font-size: 12px; font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 0.5px; }
+        .notif-title { font-size: 15px; font-weight: 700; color: #111; margin-bottom: 2px; }
+        .notif-body { font-size: 13px; line-height: 1.3; color: #333; margin-bottom: 12px; }
+        .notif-time { font-size: 11px; color: #555; }
+
+        .view-btn {
+            width: 100%;
+            background: rgba(0, 108, 53, 0.05);
+            border: none;
+            padding: 8px;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #006C35;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        /* --- بطاقة الدعوة --- */
+        .invitation-wrapper {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .invitation-card {
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 30px;
+            padding: 40px 20px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; left: 15px;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.08);
+            border: none;
+            color: #555;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .app-open .lock-screen-header { opacity: 0; transform: translateY(-50px); }
+        .app-open .notification-widget { opacity: 0; transform: translateY(-20px); pointer-events: none; }
+        .app-open .invitation-wrapper { pointer-events: all; }
+        .app-open .invitation-card { opacity: 1; transform: scale(1) translateY(0); }
+
+        .card-header h1 { font-size: 22px; color: #006C35; margin-bottom: 5px; font-weight: 700; }
+        .card-body p { font-size: 15px; line-height: 1.8; color: #444; margin-bottom: 15px; }
+        .card-body strong { color: #006C35; }
+
+        .card-details {
+            background: rgba(235, 249, 235, 0.7);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .detail-item { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #333; text-align: right; }
+        .detail-icon {
+            width: 32px; height: 32px;
+            background: rgba(0, 108, 53, 0.1);
+            color: #006C35;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 14px; flex-shrink: 0;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, #006C35, #27ae60);
+            border: none; padding: 14px; border-radius: 16px;
+            color: white; font-family: 'Cairo', sans-serif;
+            font-weight: 700; font-size: 14px;
+            cursor: pointer; width: 100%; transition: 0.2s;
+        }
+
+        .home-indicator {
+            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
+            width: 130px; height: 5px; background: white; border-radius: 10px; z-index: 100; opacity: 0.6;
+        }
+
+        #successView {
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            height: 300px; animation: fadeIn 0.5s ease;
+        }
+
+        #successView h2 { color: #006C35; font-size: 24px; margin-top: 15px; }
+        #successView i { font-size: 50px; color: #27ae60; margin-bottom: 10px; }
+
+        @keyframes slideInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="notificationSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/571/571-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="iphone-frame">
+        <div class="notch"></div>
+        <div class="btn-side power-btn"></div>
+        <div class="btn-side vol-up"></div>
+        <div class="btn-side vol-down"></div>
+        <div class="btn-side mute-sw"></div>
+
+        <div class="screen">
+            <div class="status-bar">
+                <span class="status-time" style="margin-left: 10px;">--:--</span>
+                <div class="status-right">
+                    <i class="fas fa-signal"></i>
+                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-battery-three-quarters" style="font-size: 18px;"></i>
+                </div>
+            </div>
+
+            <div class="app-container" id="appContainer">
+                
+                <div class="lock-screen-header">
+                    <div class="lock-date">الأربعاء، 17 ديسمبر</div>
+                    <div class="lock-time" id="lockTime">--:--</div>
+                </div>
+
+                <!-- الإشعار المحدث لـ اميره باسم -->
+                <div class="notification-widget" id="notification">
+                    <div class="notif-header">
+                        <div class="app-info">
+                            <div class="app-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                            <span class="app-name">صحتنا</span>
+                        </div>
+                        <span class="notif-time">الآن</span>
+                    </div>
+                    <div>
+                        <h2 class="notif-title">دعوة خاصة | اميره باسم</h2>
+                        <p class="notif-body">
+                            لديكِ دعوة لحضور معرض مشاريع التخرج.
+                        </p>
+                        <button class="view-btn" onclick="openApp()">عرض التفاصيل</button>
+                    </div>
+                </div>
+
+                <!-- بطاقة الدعوة -->
+                <div class="invitation-wrapper">
+                    <div class="invitation-card" id="invitationCard">
+                        <button class="close-btn" onclick="closeApp()"><i class="fas fa-times"></i></button>
+
+                        <div id="cardContent">
+                            <div class="card-header">
+                                <div class="app-icon" style="width: 50px; height: 50px; font-size: 22px; margin: 0 auto 10px;">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+                                <h1>مشروع "صحتنا"</h1>
+                            </div>
+                            
+                            <div class="card-body">
+                                <p>
+                                    لأن العائلة هي الملاذ، وصحتهم هي الأمان.<br>
+                                    صممنا منصة “صحتنا” لتكون التقنية التي تنسج بالرعاية، واليد التي تمتد لتكون لهم خير “سند”.<br>
+                                    <br>
+                                    سعداء بدعوتكِ زميلتنا <strong>اميره باسم</strong><br>
+                                    للاطلاع على ما أنجزناه ومشاركتنا هذا الشغف في معرض التخرج.
+                                </p>
+                            </div>
+
+                            <div class="card-details">
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="far fa-calendar-alt"></i></div>
+                                    <span>الخميس، 18-12-2025</span>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="far fa-clock"></i></div>
+                                    <span>من 9:00 صباحاً - حتى 2:00 مساءً</span>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                    <span>قاعة الجوهرة - جامعة الملك عبد العزيز</span>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fas fa-store"></i></div>
+                                    <span>بوث رقم 19</span>
+                                </div>
+                            </div>
+
+                            <button class="cta-btn" onclick="confirmAttendance()">يسعدني الحضور</button>
+                        </div>
+
+                        <div id="successView">
+                            <i class="fas fa-check-circle"></i>
+                            <h2>ننتظركِ بكل حب ✨</h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            const timeString = `${hours}:${minutes}`;
+            document.getElementById('lockTime').textContent = timeString;
+            document.querySelector('.status-time').textContent = timeString;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        window.addEventListener('load', () => {
+            const audio = document.getElementById('notificationSound');
+            setTimeout(() => { if(audio) audio.play().catch(() => {}); }, 1000); 
+        });
+
+        function openApp() {
+            document.getElementById('appContainer').classList.add('app-open');
+        }
+
+        function closeApp() {
+            document.getElementById('appContainer').classList.remove('app-open');
+        }
+
+        function confirmAttendance() {
+            document.getElementById('cardContent').style.display = 'none';
+            document.getElementById('successView').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
