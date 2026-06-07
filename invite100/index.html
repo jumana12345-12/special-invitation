@@ -940,7 +940,7 @@
                     </div>
 
                     <div>
-                        <h2 class="notif-title">الدعوة الخاصة لـ م.مازن مليباري</h2>
+                        <h2 class="notif-title">دعوة خاصة | م.مازن مليباري</h2>
                         <p class="notif-body">
                             لديك دعوة لحضور معرض انجاز لمشاريع التخرج
                         </p>
@@ -957,13 +957,16 @@
                             <div class="app-icon">
                                 <i class="fa-solid fa-bullhorn"></i>
                             </div>
-                            <span class="app-name">أخبار كلية الحاسبات</span>
+                            <!-- تعديل اسم جهة البث الإخباري إلى "اخبار" بدقة -->
+                            <span class="app-name">اخبار</span>
                         </div>
-                        <span class="notif-time">الآن</span>
+                        <!-- تم تغيير وقت وصول الخبر الإخباري من "الآن" إلى "(منذ اسبوع)" بناءً على طلبكِ بدقة -->
+                        <span class="notif-time">(منذ اسبوع)</span>
                     </div>
 
                     <div>
-                        <h2 class="notif-title"><span class="pulse-indicator"></span>خبر عاجل</h2>
+                        <!-- إضافة جملة "تأهل مشروع صحتنا !" بجانب ترويسة خبر عاجل -->
+                        <h2 class="notif-title"><span class="pulse-indicator"></span>خبر عاجل: تأهل مشروع صحتنا !</h2>
                         <p class="notif-body" style="font-weight: 700; color: #1a1a1a;">
                             مشروع صحتنا يتأهل للمرحلة النهائية في مسابقة ٣ دقايق ضمن افضل 15 مشروع  من اصل 80 مشروع
                         </p>
@@ -1108,6 +1111,7 @@
     <script>
         // تتبع تفعيل الأصوات لتجنب قيود حماية المتصفحات
         let hasInteracted = false;
+        let invitationSourceCreated = false;
 
         // دالة تحويل الأرقام الإنجليزية إلى أرقام عربية وشرقية مطابقة للصورة بدقة
         function toArabicNumerals(str) {
@@ -1163,23 +1167,44 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // دالة تشغيل نغمة رنين الدعوة المرفوعة والمسجلة من المستخدم بـ أقصى مستوى صوت (1.0)
+        // دالة تشغيل نغمة رنين الدعوة المرفوعة (170.mp3) بتضخيم الكسب الصوتي لأعلى درجة برمجياً (2.5x تضخيم)
         function playCustomInvitationSound() {
             try {
                 const audio = document.getElementById('invitationSound');
-                if (audio) {
-                    audio.currentTime = 0;
-                    audio.volume = 1.0; // رفع الصوت للحد الأقصى (Loud Volume)
-                    audio.play().catch(e => {
-                        console.log("حظر المتصفح التشغيل التلقائي للصوت المخصص مؤقتاً لحين حدوث تفاعل.");
-                    });
+                if (!audio) return;
+                
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext && !invitationSourceCreated) {
+                    try {
+                        const ctx = new AudioContext();
+                        const source = ctx.createMediaElementSource(audio);
+                        const gainNode = ctx.createGain();
+                        
+                        // تضخيم فائق مدهش برمجياً بمقدار 2.5X لرفع حد الصوت إلى أقصى طاقة ممكنة!
+                        gainNode.gain.setValueAtTime(2.5, ctx.currentTime); 
+                        source.connect(gainNode);
+                        gainNode.connect(ctx.destination);
+                        invitationSourceCreated = true;
+                        
+                        document.addEventListener('click', () => {
+                            if (ctx.state === 'suspended') ctx.resume();
+                        }, { once: false });
+                    } catch(err) {
+                        console.log("Web Audio routing bypass:", err);
+                    }
                 }
+                
+                audio.currentTime = 0;
+                audio.volume = 1.0; // أعلى جودة للتحكم اليدوي
+                audio.play().catch(e => {
+                    console.log("حظر المتصفح التشغيل التلقائي للصوت المخصص مؤقتاً لحين حدوث تفاعل.");
+                });
             } catch (e) {
                 console.log("خطأ في تشغيل النغمة المخصصة: ", e);
             }
         }
 
-        // دالة تشغيل نغمة رنين آيفون الافتراضية والشهيرة (Tri-Tone) بدقة عالية مع تضخيم الصوت ورفع السطوع الصوتي
+        // دالة تشغيل نغمة رنين آيفون الافتراضية والشهيرة (Tri-Tone) بدقة عالية مع تضخيم الصوت ورفع السطوع الصوتي للحد الأقصى (Gain = 1.2)
         function playIphoneTriToneSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1205,8 +1230,8 @@
                     
                     // إشارة البدء والتأثير الديناميكي للنبضة الصوتية
                     gainNode.gain.setValueAtTime(0, startTime);
-                    // تضخيم النغمة ورفع مستوى الصوت إلى 0.40 (بدلاً من 0.08) لتكون قوية وواضحة جداً
-                    gainNode.gain.linearRampToValueAtTime(0.40, startTime + 0.01);
+                    // تضخيم النغمة ورفع مستوى الصوت إلى 1.2 (تضخيم كامل فخم) لتكون قوية وواضحة جداً
+                    gainNode.gain.linearRampToValueAtTime(1.2, startTime + 0.01);
                     gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
                     
                     osc1.connect(filter);
@@ -1220,7 +1245,7 @@
                     osc2.stop(startTime + duration);
                 };
 
-                // نغمات الآيفون الافتراضية التصاعدية المريحة والشهيرة Tri-Tone بشكل واضح جداً
+                // نغمات الآيفون الافتراضية التصاعدية المريحة والشهيرة Tri-Tone بشكل بأعلى كسب تفاعلي (G5 -> C6 -> E6)
                 playBellNote(783.99, start, 0.20);          
                 playBellNote(1046.50, start + 0.11, 0.20);  
                 playBellNote(1318.51, start + 0.22, 0.50);  
@@ -1229,7 +1254,7 @@
             }
         }
 
-        // دالة تشغيل صوت الإشعار ثنائي النغمة لرسائل الدردشة (للخبر الإخباري)
+        // دالة تشغيل صوت الإشعار ثنائي النغمة لرسائل الدردشة (للخبر الإخباري) مرفع القوة
         function playMessageSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1238,7 +1263,7 @@
                 const ctx = new AudioContext();
                 const now = ctx.currentTime;
                 
-                const playTone = (frequency, start, duration, volume = 0.1) => {
+                const playTone = (frequency, start, duration, volume = 0.5) => {
                     const osc = ctx.createOscillator();
                     const gain = ctx.createGain();
                     
@@ -1255,8 +1280,9 @@
                     osc.stop(start + duration);
                 };
 
-                playTone(880, now, 0.12, 0.12);       
-                playTone(1174.66, now + 0.10, 0.35, 0.10); 
+                // نغمة رنين ثنائية مريحة ومرتفعة القوة
+                playTone(880, now, 0.12, 0.5);       
+                playTone(1174.66, now + 0.10, 0.35, 0.4); 
             } catch (e) {
                 console.log("تم كتم صوت الإشعار مؤقتاً لحين حدوث تفاعل.");
             }
@@ -1315,7 +1341,7 @@
                     mainNotif.classList.add('visible');
                 }
                 playIphoneTriToneSound(); // النغمة بصوت مرتفع جداً وواضح
-                playCustomInvitationSound(); // تشغيل النغمة المخصصة أيضاً بحدها الأقصى للصوت
+                playCustomInvitationSound(); // تشغيل النغمة المخصصة أيضاً بحدها الأقصى للتضخيم الصوتي
             }, 550); 
         });
 
