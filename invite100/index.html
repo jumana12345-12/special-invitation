@@ -307,7 +307,7 @@
             padding-left: 18px;
             padding-right: 18px;
             
-            /* حالة الاختفاء المتقلصة قبل الوصول للإشعار الرئيسي - يبدأ من الأعلى جداً لمحاكاة النزول */
+            /* حالة الاختفاء المتقلصة قبل الوصول للإشعار الرئيسي - يبدأ من الأعلى جداً لمحاكاة النزول السلس السريع */
             opacity: 0;
             max-height: 0;
             padding-top: 0;
@@ -318,11 +318,11 @@
             pointer-events: none;
             
             /* تأثيرات حركية فائقة السلاسة والبطء لتبدو واقعية وانسيابية للغاية */
-            transition: max-height 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        padding 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        margin 1.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        padding 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        margin 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* فئة إظهار الإشعارات بشكل متدرج وسلس وتحقيق مسافة مريحة من الحواف */
@@ -927,7 +927,7 @@
                     <div class="lock-time" id="lockTime">--:--</div>
                 </div>
 
-                <!-- إشعار الوصول العائم الفاخر (دعوة م. مازن - ينزلق ثانياً من الأعلى مباشرة بعد الخبر) -->
+                <!-- إشعار الوصول العائم الفاخر (دعوة م. مازن - ينزلق ثانياً من الأعلى مباشرة بعد الخبر بشكل سريع) -->
                 <div class="notification-widget" id="notification">
                     <div class="notif-header">
                         <div class="app-info">
@@ -940,7 +940,7 @@
                     </div>
 
                     <div>
-                        <h2 class="notif-title">دعوة خاصة | م.مازن مليباري</h2>
+                        <h2 class="notif-title">الدعوة الخاصة لـ م.مازن مليباري</h2>
                         <p class="notif-body">
                             لديك دعوة لحضور معرض انجاز لمشاريع التخرج
                         </p>
@@ -957,7 +957,7 @@
                             <div class="app-icon">
                                 <i class="fa-solid fa-bullhorn"></i>
                             </div>
-                            <span class="app-name">أخبار مكة</span>
+                            <span class="app-name">أخبار كلية الحاسبات</span>
                         </div>
                         <span class="notif-time">الآن</span>
                     </div>
@@ -1163,19 +1163,69 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // دالة تشغيل نغمة رنين الدعوة المرفوعة والمسجلة من المستخدم (170.mp3)
+        // دالة تشغيل نغمة رنين الدعوة المرفوعة والمسجلة من المستخدم بـ أقصى مستوى صوت (1.0)
         function playCustomInvitationSound() {
             try {
                 const audio = document.getElementById('invitationSound');
                 if (audio) {
                     audio.currentTime = 0;
-                    audio.volume = 0.7; // تم ضبط مستوى الصوت ليكون واضحاً ومناسباً
+                    audio.volume = 1.0; // رفع الصوت للحد الأقصى (Loud Volume)
                     audio.play().catch(e => {
                         console.log("حظر المتصفح التشغيل التلقائي للصوت المخصص مؤقتاً لحين حدوث تفاعل.");
                     });
                 }
             } catch (e) {
                 console.log("خطأ في تشغيل النغمة المخصصة: ", e);
+            }
+        }
+
+        // دالة تشغيل نغمة رنين آيفون الافتراضية والشهيرة (Tri-Tone) بدقة عالية مع تضخيم الصوت ورفع السطوع الصوتي
+        function playIphoneTriToneSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                const start = ctx.currentTime;
+                
+                const playBellNote = (freq, startTime, duration) => {
+                    const osc1 = ctx.createOscillator();
+                    osc1.type = 'sine';
+                    osc1.frequency.value = freq;
+                    
+                    const osc2 = ctx.createOscillator();
+                    osc2.type = 'triangle';
+                    osc2.frequency.value = freq * 2; 
+                    
+                    const gainNode = ctx.createGain();
+                    
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(freq * 3, startTime);
+                    
+                    // إشارة البدء والتأثير الديناميكي للنبضة الصوتية
+                    gainNode.gain.setValueAtTime(0, startTime);
+                    // تضخيم النغمة ورفع مستوى الصوت إلى 0.40 (بدلاً من 0.08) لتكون قوية وواضحة جداً
+                    gainNode.gain.linearRampToValueAtTime(0.40, startTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+                    
+                    osc1.connect(filter);
+                    osc2.connect(filter);
+                    filter.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+                    
+                    osc1.start(startTime);
+                    osc2.start(startTime);
+                    osc1.stop(startTime + duration);
+                    osc2.stop(startTime + duration);
+                };
+
+                // نغمات الآيفون الافتراضية التصاعدية المريحة والشهيرة Tri-Tone بشكل واضح جداً
+                playBellNote(783.99, start, 0.20);          
+                playBellNote(1046.50, start + 0.11, 0.20);  
+                playBellNote(1318.51, start + 0.22, 0.50);  
+            } catch (e) {
+                console.log("Audio play failed: ", e);
             }
         }
 
@@ -1205,15 +1255,14 @@
                     osc.stop(start + duration);
                 };
 
-                // نغمة رنين ثنائية مريحة وواقعية
-                playTone(880, now, 0.12, 0.08);       
-                playTone(1174.66, now + 0.10, 0.35, 0.07); 
+                playTone(880, now, 0.12, 0.12);       
+                playTone(1174.66, now + 0.10, 0.35, 0.10); 
             } catch (e) {
                 console.log("تم كتم صوت الإشعار مؤقتاً لحين حدوث تفاعل.");
             }
         }
 
-        // دالة تشغيل الصوت التفاعلي الدافئ عند النقر على الأزرار
+        // دالة تشغيل الصوت التفاعلي الفخم عند النقر على الأزرار (حاكي للاهتزاز الحسي للآيفون - Premium Subtle Click)
         function playClickSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1223,18 +1272,19 @@
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 
+                osc.type = 'sine';
+                // تردد دافئ ومكتوم (160 هرتز) لمحاكاة نقرة هبتك دافئة ممتصة بالكامل
+                osc.frequency.setValueAtTime(160, ctx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.18, ctx.currentTime);
+                // تضاؤل سريع للغاية (35 مللي ثانية) لمنع أي رنين مزعج
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035); 
+                
                 osc.connect(gain);
                 gain.connect(ctx.destination);
                 
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(750, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(380, ctx.currentTime + 0.12);
-                
-                gain.gain.setValueAtTime(0.06, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.005, ctx.currentTime + 0.12);
-                
                 osc.start(ctx.currentTime);
-                osc.stop(ctx.currentTime + 0.12);
+                osc.stop(ctx.currentTime + 0.035);
             } catch(e) {
                 console.error("Audio click play failed", e);
             }
@@ -1248,31 +1298,32 @@
             }
         }
 
-        // تسلسل انزلاق الإشعارات بشكل واقعي ومذهل عند تحميل الصفحة
+        // تسلسل انزلاق الإشعارات بشكل سريع وانسيابي رائع فور تحميل الصفحة
         window.addEventListener('load', () => {
             // تفعيل حالة استيقاظ الجوال الأساسية مباشرة
             document.body.classList.add('phone-awake');
 
-            // 1. إشعار "أخبار مكة" موجود بالفعل من البداية ومستقر دون اهتزاز وبصوت الإشعار الثنائي
+            // 1. إطلاق صوت إشعار "أخبار كلية الحاسبات" فوراً بعد 200 مللي ثانية فقط
             setTimeout(() => {
                 playMessageSound();
-            }, 300);
+            }, 200);
 
-            // 2. انزلاق إشعار "الدعوة الخاصة بالموعد" مباشرة ببطء وسلاسة تامة من الأعلى بصوت نغمتك المخصصة 170.mp3
+            // 2. انزلاق إشعار "الدعوة الخاصة لـ م.مازن مليباري" فوراً (بعد 550 مللي ثانية) ببطء وسلاسة تامة من الأعلى بصوت نغمتك المخصصة 170.mp3
             setTimeout(() => {
                 const mainNotif = document.getElementById('notification');
                 if (mainNotif) {
                     mainNotif.classList.add('visible');
                 }
-                playCustomInvitationSound();
-            }, 1000); // تم تقليل الوقت إلى ثانية واحدة فقط لينزلق مباشرة فور تشغيل الصفحة
+                playIphoneTriToneSound(); // النغمة بصوت مرتفع جداً وواضح
+                playCustomInvitationSound(); // تشغيل النغمة المخصصة أيضاً بحدها الأقصى للصوت
+            }, 550); 
         });
 
         // تشغيل مستمع الصوت الاحتياطي لمجرد قيام المستخدم بالنقر في أي مكان في الصفحة أول مرة
         document.addEventListener('click', () => {
             if (!hasInteracted) {
                 hasInteracted = true;
-                // تفعيل ملفات الصوت لتكون جاهزة للتشغيل الفوري عند الطلب
+                // تفعيل ملفات الصوت لتكون جاهزة للتشغيل الفوري عند الطلب وبأعلى طاقة
                 const customAudio = document.getElementById('invitationSound');
                 if (customAudio) {
                     customAudio.load();
