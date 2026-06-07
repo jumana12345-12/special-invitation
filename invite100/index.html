@@ -7,7 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- استيراد خط Inter للأرقام والوقت -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -115,11 +115,11 @@
             -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
 
-        /* --- الحاوية الداخلية مع تموجات iOS 16 المخصصة --- */
+        /* --- الحاوية الداخلية المتطورة مع خلفية iOS 16 الأصلية المتداخلة --- */
         .app-container {
             width: 100%;
             height: 100%;
-            background: linear-gradient(150deg, #05161e 0%, #030a12 50%, #02050a 100%);
+            background: #000000;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -128,58 +128,12 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* تموجات الخلفية السائلة الخاصة بـ iOS 16 (Liquid Waves) */
-        .ios-wave {
-            position: absolute;
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            filter: blur(50px);
-            opacity: 0.55;
-            mix-blend-mode: screen;
-            pointer-events: none;
-            z-index: 0;
-            animation: moveIosWave 22s infinite alternate ease-in-out;
-        }
-
-        .wave-blue {
-            width: 140%;
-            height: 85%;
-            background: radial-gradient(circle, #00d2ff 0%, rgba(0, 114, 255, 0) 70%);
-            top: -15%;
-            left: -20%;
-        }
-
-        .wave-green {
-            width: 150%;
-            height: 90%;
-            background: radial-gradient(circle, #00e676 0%, rgba(0, 150, 136, 0) 70%);
-            bottom: -20%;
-            right: -25%;
-            animation-duration: 26s;
-            animation-delay: -5s;
-        }
-
-        .wave-violet {
-            width: 120%;
-            height: 80%;
-            background: radial-gradient(circle, rgba(124, 77, 255, 0.35) 0%, rgba(3, 169, 244, 0) 70%);
-            top: 25%;
-            left: -10%;
-            animation-duration: 18s;
-            animation-delay: -10s;
-        }
-
-        @keyframes moveIosWave {
-            0% { transform: rotate(0deg) translate(0px, 0px) scale(1); }
-            50% { transform: rotate(90deg) translate(-25px, 20px) scale(1.1); }
-            100% { transform: rotate(180deg) translate(15px, -15px) scale(0.95); }
-        }
-
-        /* طبقة تعتيم وضبابية تفاعلية */
+        /* طبقة تعتيم وضبابية تفاعلية عند فتح لوح الدعوة */
         .app-container::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0);
             z-index: 1;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
@@ -191,58 +145,91 @@
             -webkit-backdrop-filter: blur(24px);
         }
 
-        /* --- شريط الحالة الذكي (Status Bar) --- */
+        /* --- شريط الحالة الذكي المطور بالكامل (Sleek Real iOS Status Bar) --- */
         .status-bar {
             position: absolute;
             top: 14px;
             left: 0;
             width: 100%;
-            padding: 0 26px;
+            padding: 0 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
-            font-size: 14px;
+            color: #ffffff;
             z-index: 35;
-            font-weight: 600;
-            font-family: 'Inter', sans-serif;
             pointer-events: none;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        }
-        
-        .status-right {
-            display: flex;
-            gap: 6px;
-            align-items: center;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        /* --- شاشة القفل --- */
+        /* اسم مزود الخدمة بالجهة اليمنى */
+        .status-carrier {
+            font-family: 'Inter', sans-serif;
+            font-size: 14.5px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: -0.2px;
+            text-transform: lowercase; /* mobily كما هو بالصورة تماماً */
+        }
+        
+        /* تجميعة الأيقونات بالجهة اليسرى مرتبة باتجاه LTR */
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            direction: ltr; /* تضمن ظهور الأيقونات بالترتيب: بطارية، واي فاي، شبكة من اليسار لليمين */
+        }
+
+        .status-icon-svg {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        /* خط سحب مركز التحكم الشهير بآيفون أسفل الأيقونات مباشرة */
+        .control-grabber {
+            position: absolute;
+            top: 29px;
+            left: 28px;
+            width: 18px;
+            height: 2.5px;
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 10px;
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        /* --- شاشة القفل المرتفعة لمطابقة أبعاد الصورة --- */
         .lock-screen-header {
             position: relative;
             z-index: 5;
-            margin-top: 65px; /* تم تقليله لإتاحة مساحة لظهور الإشعارات بجمالية */
+            margin-top: 42px; /* تم رفعه للأعلى قليلاً لمحاكاة تصميم الصورة بدقة متناهية */
             display: flex;
             flex-direction: column;
             align-items: center;
             color: white;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.4);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .lock-date {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            opacity: 0.95;
-            letter-spacing: 0.5px;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 3px;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
         }
 
+        /* تأثير العمق الزجاجي والمظهر المحفور للساعة ليتطابق مع الصورة بالملي */
         .lock-time {
-            font-family: 'Inter', sans-serif;
-            font-size: 78px;
-            font-weight: 300;
+            font-family: 'Inter', 'Cairo', sans-serif;
+            font-size: 88px;
+            font-weight: 700; /* وزن مثالي مماثل لساعة iOS 16 الرسمية */
             line-height: 1;
             letter-spacing: -2px;
+            color: rgba(255, 255, 255, 0.45);
+            /* تأثير نحت وزجاج محفور مطابق للصورة المرفقة */
+            text-shadow: 
+                -1px -1px 1px rgba(0, 0, 0, 0.45), 
+                1px 1px 1px rgba(255, 255, 255, 0.28), 
+                0 0 10px rgba(255, 255, 255, 0.12);
         }
 
         /* --- الإشعار بتصميم مكدس ومتقلص مع تباعد مثالي من الحواف اليسرى واليمنى --- */
@@ -630,6 +617,7 @@
         .card-body p { font-size: 13.5px; line-height: 1.75; color: #2d3e33; margin-bottom: 5px; font-weight: 400; }
         .card-body strong { color: #006C35; font-weight: 700; }
 
+        /* تباعد مريح تحت تفاصيل البطاقة لإبعاد زر القبول عنها بجمالية */
         .card-details {
             background: rgba(235, 249, 235, 0.85);
             border-radius: 18px;
@@ -637,7 +625,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 4px;
+            margin-bottom: 24px; /* تم زيادة الهامش السفلي هنا من 4px إلى 24px لخلق مسافة مريحة مع الزر */
             border: 1px solid rgba(0, 108, 53, 0.08);
         }
 
@@ -773,31 +761,113 @@
 
         <div class="screen" id="screenView">
             
-            <!-- شريط الحالة العلوي المستمر -->
+            <!-- شريط الحالة العلوي المستمر الأصلي والمطور بالكامل -->
             <div class="status-bar">
-                <span class="status-time" style="margin-left: 10px;">--:--</span>
+                <div class="status-left">
+                    <span class="status-time">--:--</span>
+                </div>
                 <div class="status-right">
-                    <i class="fas fa-signal"></i>
-                    <i class="fas fa-wifi"></i>
-                    <i class="fas fa-battery-three-quarters" style="font-size: 18px;"></i>
+                    <!-- أيقونة شبكة الآيفون -->
+                    <div class="ios-signal">
+                        <div class="ios-signal-bar active"></div>
+                        <div class="ios-signal-bar active"></div>
+                        <div class="ios-signal-bar active"></div>
+                        <div class="ios-signal-bar"></div>
+                    </div>
+                    <!-- أيقونة الواي فاي -->
+                    <div class="ios-wifi-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <!-- كبسولة بطارية الآيفون التفاعلية -->
+                    <div class="ios-battery">
+                        <div class="ios-battery-pill">
+                            <div class="ios-battery-level"></div>
+                        </div>
+                        <div class="ios-battery-cap"></div>
+                    </div>
                 </div>
             </div>
+
+            <!-- خط سحب مركز التحكم الشهير بآيفون أسفل الأيقونات مباشرة -->
+            <div class="control-grabber"></div>
 
             <!-- حاوية التطبيقات وقفل الشاشة -->
             <div class="app-container" id="appContainer">
                 
-                <!-- تموجات حركية على طراز iOS 16 التفاعلي -->
-                <div class="ios-wave wave-blue"></div>
-                <div class="ios-wave wave-green"></div>
-                <div class="ios-wave wave-violet"></div>
+                <!-- خلفية iOS 16 الأصلية الدائرية المتوهجة والمطابقة تماماً لصورتك (طبق الأصل) -->
+                <svg class="ios16-wallpaper" viewBox="0 0 375 812" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;">
+                    <defs>
+                        <!-- تدرج إضاءة الضوء العلوي الفضي/البنفسجي المعتم -->
+                        <radialGradient id="topAmbient" cx="50%" cy="0%" r="75%">
+                            <stop offset="0%" stop-color="#efeaee" stop-opacity="0.6"/>
+                            <stop offset="50%" stop-color="#181525" stop-opacity="0.3"/>
+                            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                        </radialGradient>
+                        
+                        <!-- تدرج إضاءة الضوء السفلي الأزرق السماوي/الفوسفوري -->
+                        <radialGradient id="bottomAmbient" cx="50%" cy="100%" r="70%">
+                            <stop offset="0%" stop-color="#80dee6" stop-opacity="0.75"/>
+                            <stop offset="45%" stop-color="#071b26" stop-opacity="0.25"/>
+                            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                        </radialGradient>
+                        
+                        <!-- تدرج حلقة النصف العلوي الفضية مع تمويه للتلاشي عند الأطراف -->
+                        <linearGradient id="topRingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#bba6e3" stop-opacity="0.05"/>
+                            <stop offset="60%" stop-color="#ded4f5" stop-opacity="0.55"/>
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
+                        </linearGradient>
+                        
+                        <!-- تدرج حلقة النصف السفلي الفوسفورية مع تمويه للتلاشي عند الأطراف -->
+                        <linearGradient id="bottomRingGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                            <stop offset="0%" stop-color="#4db3bd" stop-opacity="0.1"/>
+                            <stop offset="65%" stop-color="#b4eff5" stop-opacity="0.65"/>
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.85"/>
+                        </linearGradient>
+                        
+                        <!-- مرشحات التوهج النيوني الفاخر للحلقات المزدوجة -->
+                        <filter id="glowFilterTop" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="3" result="blur1" />
+                            <feGaussianBlur stdDeviation="9" result="blur2" />
+                            <feMerge>
+                                <feMergeNode in="blur2" />
+                                <feMergeNode in="blur1" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        
+                        <filter id="glowFilterBottom" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="3.5" result="blur1" />
+                            <feGaussianBlur stdDeviation="12" result="blur2" />
+                            <feMerge>
+                                <feMergeNode in="blur2" />
+                                <feMergeNode in="blur1" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- لون أسود مطفي عميق جداً في المنتصف -->
+                    <rect width="375" height="812" fill="#040306"/>
+                    
+                    <!-- الإضاءات المحيطية للـ Wallpaper -->
+                    <rect width="375" height="812" fill="url(#topAmbient)"/>
+                    <rect width="375" height="812" fill="url(#bottomAmbient)"/>
+                    
+                    <!-- الحلقة العلوية: تتقاطع تماماً عند المنتصف (الارتفاع 400px) -->
+                    <circle cx="187.5" cy="235" r="165" fill="none" stroke="url(#topRingGrad)" stroke-width="2" filter="url(#glowFilterTop)" opacity="0.85" />
+                    
+                    <!-- الحلقة السفلية: تتقاطع تماماً عند المنتصف (الارتفاع 400px) -->
+                    <circle cx="187.5" cy="565" r="165" fill="none" stroke="url(#bottomRingGrad)" stroke-width="2.5" filter="url(#glowFilterBottom)" opacity="0.9" />
+                </svg>
 
-                <!-- شاشة القفل: ساعة وتاريخ ذكيين -->
+                <!-- شاشة القفل: ساعة وتاريخ ذكيين متوافقين بالكامل مع نمط وأرقام الصورة -->
                 <div class="lock-screen-header">
                     <div class="lock-date" id="lockDate">الأحد، 7 يونيو</div>
                     <div class="lock-time" id="lockTime">--:--</div>
                 </div>
 
-                <!-- إشعار الوصول العائم الفاخر (دعوة م. مازن - ينزلق ثانياً بعد ثوانٍ بسيطة من الأعلى ببطء) -->
+                <!-- إشعار الوصول العائم الفاخر (دعوة م. مازن - ينزلق ثانياً من الأعلى مباشرة بعد الخبر) -->
                 <div class="notification-widget" id="notification">
                     <div class="notif-header">
                         <div class="app-info">
@@ -929,7 +999,7 @@
                                 </p>
                             </div>
 
-                            <!-- تفاصيل المعرض المصغرة المحدثة بالوقت الجديد -->
+                            <!-- تفاصيل المعرض المصغرة المحدثة بالوقت الجديد مع تباعد سفلي أكبر -->
                             <div class="card-details">
                                 <div class="detail-item">
                                     <div class="detail-icon"><i class="far fa-calendar-alt"></i></div>
@@ -979,6 +1049,12 @@
         // تتبع تفعيل الأصوات لتجنب قيود حماية المتصفحات
         let hasInteracted = false;
 
+        // دالة تحويل الأرقام الإنجليزية إلى أرقام عربية وشرقية مطابقة للصورة بدقة
+        function toArabicNumerals(str) {
+            const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            return str.replace(/[0-9]/g, w => arabicDigits[+w]);
+        }
+
         // دالة تحديث الوقت والتاريخ بشكل مستمر ومتناغم مع متصفحات الجوال
         function updateClock() {
             const now = new Date();
@@ -993,7 +1069,8 @@
             // إضافة الصفر لتنسيق رقمين دائماً
             minutes = minutes < 10 ? '0' + minutes : minutes;
             
-            const timeString = `${hours}:${minutes}`;
+            // تحويل الأرقام إلى خط الأرقام الشرقية المحددة في الصورة
+            const timeString = toArabicNumerals(`${hours}:${minutes}`);
             
             const lockTimeEl = document.getElementById('lockTime');
             const statusTimeEl = document.querySelector('.status-time');
@@ -1001,9 +1078,21 @@
             if (lockTimeEl) lockTimeEl.textContent = timeString;
             if (statusTimeEl) statusTimeEl.textContent = timeString;
 
-            // تحديث التاريخ بتنسيق محلي ممتاز
-            const options = { weekday: 'long', day: 'numeric', month: 'long' };
-            const dateString = now.toLocaleDateString('ar-EG', options);
+            // تحديث التاريخ بصيغة "أحد ٧ يونيو" ليتطابق مع الصورة بالملي
+            const weekday = now.toLocaleDateString('ar-EG', { weekday: 'long' })
+                              .replace('الأحد', 'أحد')
+                              .replace('الإثنين', 'إثنين')
+                              .replace('الثلاثاء', 'ثلاثاء')
+                              .replace('الأربعاء', 'أربعاء')
+                              .replace('الخميس', 'خميس')
+                              .replace('الجمعة', 'جمعة')
+                              .replace('السبت', 'سبت');
+                              
+            const dayNum = toArabicNumerals(now.toLocaleDateString('ar-EG', { day: 'numeric' }));
+            const monthName = now.toLocaleDateString('ar-EG', { month: 'long' });
+            
+            const dateString = `${weekday} ${dayNum} ${monthName}`;
+            
             const lockDateEl = document.getElementById('lockDate');
             if (lockDateEl) {
                 lockDateEl.textContent = dateString;
@@ -1107,16 +1196,16 @@
             // 1. إشعار "أخبار مكة" موجود بالفعل من البداية ومستقر دون اهتزاز وبصوت الإشعار الثنائي
             setTimeout(() => {
                 playMessageSound();
-            }, 800);
+            }, 300);
 
-            // 2. انزلاق إشعار "الدعوة الخاصة بالموعد" ببطء وسلاسة تامة من الأعلى ومزامنته مع نغمتكِ المرفوعة 170.mp3
+            // 2. انزلاق إشعار "الدعوة الخاصة بالموعد" مباشرة ببطء وسلاسة تامة من الأعلى بصوت نغمتك المخصصة 170.mp3
             setTimeout(() => {
                 const mainNotif = document.getElementById('notification');
                 if (mainNotif) {
                     mainNotif.classList.add('visible');
                 }
                 playCustomInvitationSound();
-            }, 3300);
+            }, 1000); // تم تقليل الوقت إلى ثانية واحدة فقط لينزلق مباشرة فور تشغيل الصفحة
         });
 
         // تشغيل مستمع الصوت الاحتياطي لمجرد قيام المستخدم بالنقر في أي مكان في الصفحة أول مرة
