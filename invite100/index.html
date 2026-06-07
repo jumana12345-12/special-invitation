@@ -7,7 +7,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <!-- استيراد خط Inter للأرقام والوقت -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -115,11 +115,11 @@
             -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
 
-        /* --- الحاوية الداخلية المتطورة مع خلفية iOS 16 الأصلية المتداخلة --- */
+        /* --- الحاوية الداخلية مع تموجات وخلفية iOS 16 الأصلية --- */
         .app-container {
             width: 100%;
             height: 100%;
-            background: #000000;
+            background: #040306;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -128,7 +128,7 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* طبقة تعتيم وضبابية تفاعلية عند فتح لوح الدعوة */
+        /* طبقة تعتيم وضبابية تفاعلية عند فتح لوحة الدعوة */
         .app-container::before {
             content: '';
             position: absolute;
@@ -145,7 +145,7 @@
             -webkit-backdrop-filter: blur(24px);
         }
 
-        /* --- شريط الحالة الذكي المطور بالكامل (Sleek Real iOS Status Bar) --- */
+        /* --- شريط الحالة الذكي المطور (Sleek Real iOS Status Bar) --- */
         .status-bar {
             position: absolute;
             top: 14px;
@@ -171,24 +171,84 @@
             text-transform: lowercase; /* mobily كما هو بالصورة تماماً */
         }
         
-        /* تجميعة الأيقونات بالجهة اليسرى مرتبة باتجاه LTR */
+        /* تجميعة الأيقونات بالجهة اليسرى مرتبة باتجاه LTR لمطابقة الصورة */
         .status-left {
             display: flex;
             align-items: center;
-            gap: 6px;
-            direction: ltr; /* تضمن ظهور الأيقونات بالترتيب: بطارية، واي فاي، شبكة من اليسار لليمين */
+            gap: 7px;
+            direction: ltr; /* تضمن ظهور الأيقونات بالترتيب من اليسار: بطارية، واي فاي، شبكة */
         }
 
-        .status-icon-svg {
-            color: rgba(255, 255, 255, 0.95);
+        /* كبسولة بطارية آيفون تفاعلية وحقيقية بالكامل */
+        .ios-battery {
+            display: flex;
+            align-items: center;
+            gap: 1.5px;
         }
 
-        /* خط سحب مركز التحكم الشهير بآيفون أسفل الأيقونات مباشرة */
+        .ios-battery-pill {
+            width: 22.5px;
+            height: 11.5px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 3.5px;
+            padding: 1px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .ios-battery-level {
+            height: 100%;
+            width: 88%; /* تعيين نسبة الشحن الافتراضية للبطارية لتبدو مشحونة بشكل طبيعي */
+            background-color: #ffffff;
+            border-radius: 1.8px;
+        }
+
+        .ios-battery-cap {
+            width: 1.5px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 0 1px 1px 0;
+        }
+
+        /* أيقونة الواي فاي الدقيقة */
+        .ios-wifi-icon {
+            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        /* أيقونة الإشارة الدقيقة لنظام iOS */
+        .ios-signal {
+            display: flex;
+            align-items: flex-end;
+            gap: 1.5px;
+            height: 10px;
+            width: 17px;
+        }
+
+        .ios-signal-bar {
+            width: 3px;
+            background-color: rgba(255, 255, 255, 0.35);
+            border-radius: 0.8px;
+        }
+
+        .ios-signal-bar.active {
+            background-color: #ffffff;
+        }
+
+        .ios-signal-bar:nth-child(1) { height: 30%; }
+        .ios-signal-bar:nth-child(2) { height: 50%; }
+        .ios-signal-bar:nth-child(3) { height: 75%; }
+        .ios-signal-bar:nth-child(4) { height: 100%; }
+
+        /* خط سحب مركز التحكم الشهير بآيفون أسفل الأيقونات مباشرة بالجهة اليسرى */
         .control-grabber {
             position: absolute;
             top: 29px;
-            left: 28px;
-            width: 18px;
+            left: 24px;
+            width: 24px;
             height: 2.5px;
             background: rgba(255, 255, 255, 0.45);
             border-radius: 10px;
@@ -209,27 +269,25 @@
         }
 
         .lock-date {
-            font-size: 19px;
+            font-size: 18.5px;
             font-weight: 700;
-            margin-bottom: 3px;
-            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2px;
+            color: rgba(255, 255, 255, 0.9);
             letter-spacing: 0.3px;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        /* تأثير العمق الزجاجي والمظهر المحفور للساعة ليتطابق مع الصورة بالملي */
+        /* تصميم الساعة باللون الأبيض والأرقام الإنجليزية كآيفون iOS 16 الأصلي تماماً */
         .lock-time {
-            font-family: 'Inter', 'Cairo', sans-serif;
-            font-size: 88px;
-            font-weight: 700; /* وزن مثالي مماثل لساعة iOS 16 الرسمية */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 84px;
+            font-weight: 700; /* وزن عريض أصلي وجذاب للآيفون */
             line-height: 1;
-            letter-spacing: -2px;
-            color: rgba(255, 255, 255, 0.45);
-            /* تأثير نحت وزجاج محفور مطابق للصورة المرفقة */
-            text-shadow: 
-                -1px -1px 1px rgba(0, 0, 0, 0.45), 
-                1px 1px 1px rgba(255, 255, 255, 0.28), 
-                0 0 10px rgba(255, 255, 255, 0.12);
+            letter-spacing: -1.5px;
+            color: #ffffff; /* أبيض ناصع نقي كما في رغبتك */
+            opacity: 0.98;
+            /* تأثير إسقاط ظلال ناعمة ودقيقة لمنح الساعة بعداً وعمقاً فائري الجودة وفصلها عن الخلفية */
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         /* --- الإشعار بتصميم مكدس ومتقلص مع تباعد مثالي من الحواف اليسرى واليمنى --- */
@@ -1069,14 +1127,14 @@
             // إضافة الصفر لتنسيق رقمين دائماً
             minutes = minutes < 10 ? '0' + minutes : minutes;
             
-            // تحويل الأرقام إلى خط الأرقام الشرقية المحددة في الصورة
-            const timeString = toArabicNumerals(`${hours}:${minutes}`);
+            // تم تغيير الأرقام هنا لتكون بالإنجليزية للوقت كما طلبتِ تماماً (مثال: 8:39)
+            const timeStringEnglish = `${hours}:${minutes}`;
             
             const lockTimeEl = document.getElementById('lockTime');
             const statusTimeEl = document.querySelector('.status-time');
             
-            if (lockTimeEl) lockTimeEl.textContent = timeString;
-            if (statusTimeEl) statusTimeEl.textContent = timeString;
+            if (lockTimeEl) lockTimeEl.textContent = timeStringEnglish;
+            if (statusTimeEl) statusTimeEl.textContent = timeStringEnglish;
 
             // تحديث التاريخ بصيغة "أحد ٧ يونيو" ليتطابق مع الصورة بالملي
             const weekday = now.toLocaleDateString('ar-EG', { weekday: 'long' })
