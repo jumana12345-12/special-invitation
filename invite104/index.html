@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة مشروع صحتنا</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- استيراد خط Inter للأرقام والوقت -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            height: 100vh;
+            font-family: 'Cairo', sans-serif;
+            background-color: #0d0e12;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* خلفية Bokeh حيوية متوهجة وناعمة للشاشة الخارجية */
+        .background-glow {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(circle at 30% 20%, #162c21 0%, #080c10 100%);
+            overflow: hidden;
+        }
+
+        .bokeh-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: floatBokeh 15s infinite alternate ease-in-out;
+        }
+
+        .bokeh-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 229, 255, 0.3) 0%, transparent 70%);
+            top: 10%;
+            left: 15%;
+            animation-duration: 18s;
+        }
+
+        .bokeh-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 230, 118, 0.25) 0%, transparent 70%);
+            bottom: 15%;
+            right: 10%;
+            animation-duration: 22s;
+        }
+
+        @keyframes floatBokeh {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, -40px) scale(1.15); }
+        }
+
+        /* --- إطار الآيفون الحديث --- */
+        .iphone-frame {
+            position: relative;
+            width: 375px;
+            height: 812px;
+            background: #1c1c1e;
+            border-radius: 50px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 
+                        0 0 0 1px #2c2c2e,
+                        0 0 0 4px #3a3a3c inset;
+            padding: 12px;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .notch {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 32px;
+            background: #1c1c1e;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 45;
+            pointer-events: none;
+        }
+
+        .btn-side { position: absolute; background: #2c2c2e; border-radius: 4px; box-shadow: inset -1px 0 2px rgba(0,0,0,0.5); }
+        .power-btn { top: 200px; right: -6px; width: 6px; height: 60px; }
+        .vol-up { top: 180px; left: -6px; width: 6px; height: 40px; }
+        .vol-down { top: 230px; left: -6px; width: 6px; height: 40px; }
+        .mute-sw { top: 130px; left: -6px; width: 6px; height: 25px; }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 38px;
+            overflow: hidden;
+            position: relative;
+            mask-image: -webkit-radial-gradient(white, black);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+
+        /* --- الحاوية الداخلية مع تموجات وخلفية iOS 16 الأصلية --- */
+        .app-container {
+            width: 100%;
+            height: 100%;
+            background: #040306;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* طبقة تعتيم وضبابية تفاعلية عند فتح لوحة الدعوة */
+        .app-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            z-index: 1;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        
+        .app-container.app-open::before {
+            background: rgba(8, 18, 14, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        /* --- شريط الحالة الذكي المطور (Sleek Real iOS Status Bar) --- */
+        .status-bar {
+            position: absolute;
+            top: 14px;
+            left: 0;
+            width: 100%;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            z-index: 35;
+            pointer-events: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* اسم مزود الخدمة بالجهة اليمنى */
+        .status-carrier {
+            font-family: 'Inter', sans-serif;
+            font-size: 14.5px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: -0.2px;
+            text-transform: lowercase; /* mobily كما هو بالصورة تماماً */
+        }
+        
+        /* تجميعة الأيقونات بالجهة اليسرى مرتبة بجانب بعضها البعض */
+        .status-left-group {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            direction: ltr; /* تضمن ترتيب من اليسار لليمين: بطارية، واي فاي، شبكة */
+        }
+
+        /* كبسولة بطارية آيفون تفاعلية وحقيقية بالكامل */
+        .ios-battery {
+            display: flex;
+            align-items: center;
+            gap: 1.5px;
+        }
+
+        .ios-battery-pill {
+            width: 22.5px;
+            height: 11.5px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 3.5px;
+            padding: 1px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .ios-battery-level {
+            height: 100%;
+            width: 88%; /* تعيين نسبة الشحن الافتراضية للبطارية لتبدو مشحونة بشكل طبيعي */
+            background-color: #ffffff;
+            border-radius: 1.8px;
+        }
+
+        .ios-battery-cap {
+            width: 1.5px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 0 1px 1px 0;
+        }
+
+        /* أيقونة الواي فاي الدقيقة */
+        .ios-wifi-icon {
+            font-size: 12.5px;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        /* أيقونة الإشارة الدقيقة لنظام iOS */
+        .ios-signal {
+            display: flex;
+            align-items: flex-end;
+            gap: 1.5px;
+            height: 10px;
+            width: 17px;
+        }
+
+        .ios-signal-bar {
+            width: 3px;
+            background-color: rgba(255, 255, 255, 0.35);
+            border-radius: 0.8px;
+        }
+
+        .ios-signal-bar.active {
+            background-color: #ffffff;
+        }
+
+        .ios-signal-bar:nth-child(1) { height: 30%; }
+        .ios-signal-bar:nth-child(2) { height: 50%; }
+        .ios-signal-bar:nth-child(3) { height: 75%; }
+        .ios-signal-bar:nth-child(4) { height: 100%; }
+
+        /* خط سحب مركز التحكم الشهير بآيفون أسفل الأيقونات مباشرة بالجهة اليسرى */
+        .control-grabber {
+            position: absolute;
+            top: 29px;
+            left: 24px;
+            width: 24px;
+            height: 2.5px;
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 10px;
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        /* --- شاشة القفل المرتفعة لمطابقة أبعاد الصورة --- */
+        .lock-screen-header {
+            position: relative;
+            z-index: 5;
+            margin-top: 42px; /* تم رفعه للأعلى قليلاً لمحاكاة تصميم الصورة بدقة متناهية */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lock-date {
+            font-size: 18.5px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* تصميم الساعة باللون الأبيض والأرقام الإنجليزية كآيفون iOS 16 الأصلي تماماً */
+        .lock-time {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 84px;
+            font-weight: 700; /* وزن عريض أصلي وجذاب للآيفون */
+            line-height: 1;
+            letter-spacing: -1.5px;
+            color: #ffffff; /* أبيض ناصع نقي كما في رغبتك */
+            opacity: 0.98;
+            /* تأثير إسقاط ظلال ناعمة ودقيقة لمنح الساعة بعداً وعمقاً فائري الجودة وفصلها عن الخلفية */
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- الإشعار بتصميم مكدس ومتقلص مع تباعد مثالي من الحواف اليسرى واليمنى --- */
+        .notification-widget {
+            position: relative;
+            z-index: 10;
+            width: 92%;
+            max-width: 350px;
+            background: rgba(255, 255, 255, 0.85); 
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border-radius: 22px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            
+            /* تباعد داخلي جانبي مستقر لمنع الالتصاق بالحواف الجانبية */
+            padding-left: 18px;
+            padding-right: 18px;
+            
+            /* حالة الاختفاء المتقلصة قبل الوصول للإشعار الرئيسي - يبدأ من الأعلى جداً لمحاكاة النزول السلس السريع */
+            opacity: 0;
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-top: 0;
+            overflow: hidden;
+            transform: translateY(-160px) scale(0.85);
+            pointer-events: none;
+            
+            /* تأثيرات حركية فائقة السلاسة والبطء لتبدو واقعية وانسيابية للغاية */
+            transition: max-height 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        padding 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        margin 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* فئة إظهار الإشعارات بشكل متدرج وسلس وتحقيق مسافة مريحة من الحواف */
+        .notification-widget.visible {
+            opacity: 1;
+            max-height: 250px; /* سعة آمنة للمحتويات */
+            padding-top: 15px;
+            padding-bottom: 16px;
+            margin-top: 15px;
+            transform: translateY(0) scale(1);
+            pointer-events: all;
+        }
+
+        /* تلاشي وتقلص الإشعارات بالكامل عند فتح لوحة الدعوة */
+        .app-open .notification-widget {
+            opacity: 0 !important;
+            transform: translateY(-20px) scale(0.9) !important;
+            max-height: 0 !important;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            pointer-events: none !important;
+        }
+        
+        .notif-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 8px; /* تباعد مريح بين الهيدر والمحتوى */
+        }
+        .app-info { display: flex; align-items: center; gap: 8px; }
+        
+        .app-icon {
+            width: 20px; height: 20px;
+            background: linear-gradient(135deg, #006C35, #27ae60);
+            border-radius: 5px;
+            display: flex; justify-content: center; align-items: center;
+            color: white; font-size: 10px;
+            box-shadow: 0 2px 6px rgba(0, 108, 53, 0.25);
+        }
+        
+        .app-name { font-size: 11.5px; font-weight: 700; color: #1a3020; text-transform: uppercase; letter-spacing: 0.5px; }
+        .notif-title { font-size: 14.5px; font-weight: 700; color: #0d1a10; margin-bottom: 4px; }
+        .notif-body { font-size: 12.5px; line-height: 1.5; color: #2d3e33; margin-bottom: 12px; }
+        .notif-time { font-size: 11px; color: #556c5a; font-weight: 600; }
+
+        .view-btn {
+            width: 100%;
+            background: rgba(0, 108, 53, 0.08);
+            border: 1px solid rgba(0, 108, 53, 0.15);
+            padding: 10px;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: #006C35;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .view-btn:active {
+            background: rgba(0, 108, 53, 0.15);
+            transform: scale(0.98);
+        }
+
+        /* --- الإشعار للخبر العاجل المتراصّ باللون الذهبي الفاخر --- */
+        .breaking-news-widget {
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        /* عند تراص الإشعارين، يقل الهامش بينهما لمحاكاة الـ Stack */
+        .notification-widget.visible + .breaking-news-widget.visible {
+            margin-top: 10px;
+        }
+
+        .breaking-news-widget .app-icon {
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            box-shadow: 0 2px 6px rgba(212, 175, 55, 0.25);
+        }
+
+        .breaking-news-widget .app-name {
+            color: #aa7c11;
+        }
+
+        .breaking-news-widget .view-btn {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: #aa7c11;
+        }
+
+        .breaking-news-widget .view-btn:active {
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        /* دوت النبض الحي للخبر العاجل باللون الذهبي المتوهج */
+        .pulse-indicator {
+            width: 8px;
+            height: 8px;
+            background-color: #d4af37;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            animation: pulseGold 1.5s infinite;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        @keyframes pulseGold {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(212, 175, 55, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        /* --- لوحة عرض محتوى الخبر التفصيلي (iOS News Bottom Sheet) --- */
+        .news-sheet-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .news-sheet-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .news-sheet {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 88%;
+            background: #ffffff;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+            box-shadow: 0 -15px 40px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #2c3e50;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .news-sheet-overlay.active .news-sheet {
+            transform: translateY(0);
+        }
+
+        /* مقبض السحب المحاكي لنظام آبل */
+        .drag-handle {
+            width: 40px;
+            height: 5px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin: 10px auto 5px;
+            flex-shrink: 0;
+        }
+
+        .news-sheet-header {
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f2f2f2;
+            flex-shrink: 0;
+        }
+
+        .news-sheet-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #aa7c11;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .news-sheet-close {
+            background: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            color: #666;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .news-sheet-close:active {
+            background: #e0e0e0;
+        }
+
+        /* حاوية محتوى التقرير الصحفي المنسدل */
+        .news-sheet-content {
+            padding: 20px 20px 85px 20px; /* تم إضافة زيادة حشوة سفلية بمقدار 85px لترك مسافة مريحة ممتازة تحت النص */
+            overflow-y: auto;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* ترويسة الخبر الصحفي الفخم */
+        .news-article-title {
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.5;
+            color: #1a252f;
+        }
+
+        .news-metadata {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: 700;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .news-paragraph {
+            font-size: 13.5px;
+            line-height: 1.8;
+            color: #34495e;
+            text-align: justify;
+        }
+
+        /* رابط تويتر الأنيق والجديد */
+        .twitter-direct-link {
+            color: #1d9bf0;
+            font-weight: 800;
+            text-decoration: none;
+            border-bottom: 2px dashed rgba(29, 155, 240, 0.4);
+            padding-bottom: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .twitter-direct-link:hover {
+            color: #0c7abf;
+            border-bottom-color: #0c7abf;
+            background: rgba(29, 155, 240, 0.05);
+            border-radius: 4px;
+            padding: 0 4px 1px;
+        }
+
+        /* تمييز أسماء البطلات والأساتذة بجمالية */
+        .highlight-names {
+            font-weight: 700;
+            color: #006C35;
+            background: rgba(0, 108, 53, 0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* اقتباس التصريح الوجداني */
+        .quote-block {
+            border-right: 4px solid #27ae60;
+            background: rgba(39, 174, 96, 0.05);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-style: italic;
+            font-weight: 600;
+            line-height: 1.7;
+            color: #27ae60;
+            font-size: 12.5px;
+        }
+
+        /* --- بطاقة الدعوة المتطورة (المشهد الثاني) --- */
+        .invitation-wrapper {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 15;
+            pointer-events: none;
+            padding: 15px;
+        }
+
+        .invitation-card {
+            width: 100%;
+            max-width: 345px;
+            background: rgba(255, 255, 255, 0.93);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 28px;
+            padding: 38px 20px 42px; /* تم زيادة المسافة السفلية للبطاقة من 24px إلى 42px كمسافة أمان مريحة */
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            position: relative;
+            
+            opacity: 0;
+            transform: scale(0.85) translateY(40px);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            text-align: center;
+            transition: all 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* زر الإغلاق الأنيق */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.06);
+            border: none;
+            color: #555;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            z-index: 20;
+        }
+        
+        .close-btn:hover {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            transform: rotate(90deg);
+        }
+
+        /* تفعيل حالات العرض للـ iOS */
+        .app-open .lock-screen-header { opacity: 0; transform: translateY(-30px); }
+        .app-open .invitation-wrapper { pointer-events: all; }
+        .app-open .invitation-card { opacity: 1; transform: scale(1) translateY(0); }
+
+        /* تفاصيل ومحتوى البطاقة */
+        .card-header h1 { font-size: 22px; color: #006C35; margin-bottom: 2px; font-weight: 800; letter-spacing: -0.5px; }
+        .card-body p { font-size: 13.5px; line-height: 1.75; color: #2d3e33; margin-bottom: 5px; font-weight: 400; }
+        .card-body strong { color: #006C35; font-weight: 700; }
+
+        /* تباعد مريح تحت تفاصيل البطاقة لإبعاد زر القبول عنها بجمالية */
+        .card-details {
+            background: rgba(235, 249, 235, 0.85);
+            border-radius: 18px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px; /* تم زيادة الهامش السفلي هنا من 4px إلى 24px لخلق مسافة مريحة مع الزر */
+            border: 1px solid rgba(0, 108, 53, 0.08);
+        }
+
+        .detail-item { display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: #1a3020; text-align: right; font-weight: 600; }
+        .detail-icon {
+            width: 30px; height: 30px;
+            background: rgba(0, 108, 53, 0.1);
+            color: #006C35;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 13px; flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0, 108, 53, 0.05);
+        }
+
+        /* زر اتخاذ القرار المتوهج المتدرج */
+        .cta-btn {
+            background: linear-gradient(135deg, #006C35, #27ae60);
+            border: none;
+            padding: 14px;
+            border-radius: 16px;
+            color: white;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 14.5px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0, 108, 53, 0.25);
+            width: 100%;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .cta-btn:hover::after {
+            left: 100%;
+        }
+
+        .cta-btn:active { transform: scale(0.96); opacity: 0.95; }
+
+        .home-indicator {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 5px;
+            background: white;
+            border-radius: 10px;
+            z-index: 100;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+
+        /* رسالة الختام الراقية */
+        #successView {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 280px;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #successView h2 {
+            color: #006C35;
+            font-size: 24px;
+            margin-top: 15px;
+            font-weight: 800;
+        }
+        
+        #successView i {
+            font-size: 58px;
+            color: #27ae60;
+            margin-bottom: 10px;
+            animation: popIcon 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 4px 12px rgba(39, 174, 96, 0.2));
+        }
+
+        /* بتلات وجزيئات متطايرة */
+        .confetti-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 30;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        
+        @keyframes popIcon {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        /* تجاوب تام مع الشاشات المتنقلة والهواتف */
+        @media (max-width: 480px) {
+            body { background: #000; }
+            .iphone-frame { width: 100%; height: 100%; border-radius: 0; padding: 0; box-shadow: none; border: none; }
+            .notch, .btn-side { display: none; }
+            .screen { border-radius: 0; }
+            .status-bar { top: 0; padding: 12px 24px; }
+            .home-indicator { bottom: 10px; }
+            .lock-screen-header { margin-top: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- مؤثرات Bokeh الخلفية للجهاز المكتبي -->
+    <div class="background-glow">
+        <div class="bokeh-circle bokeh-1"></div>
+        <div class="bokeh-circle bokeh-2"></div>
+    </div>
+
+    <!-- إطار الهاتف الذكي التفاعلي -->
+    <div class="iphone-frame" id="iphoneDevice">
+        <div class="notch"></div>
+        <div class="btn-side power-btn"></div>
+        <div class="btn-side vol-up"></div>
+        <div class="btn-side vol-down"></div>
+        <div class="btn-side mute-sw"></div>
+
+        <div class="screen" id="screenView">
+            
+            <!-- شريط الحالة العلوي المستمر الأصلي والمطور بالكامل بتنسيق iOS التفاعلي والترتيب الصحيح -->
+            <div class="status-bar">
+                <!-- الجهة اليسرى: مجمعة ومتراصة بجانب بعضها البعض تماماً كالصورة -->
+                <div class="status-left-group">
+                    <!-- كبسولة بطارية الآيفون التفاعلية -->
+                    <div class="ios-battery">
+                        <div class="ios-battery-pill">
+                            <div class="ios-battery-level"></div>
+                        </div>
+                        <div class="ios-battery-cap"></div>
+                    </div>
+                    <!-- أيقونة الواي فاي -->
+                    <div class="ios-wifi-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <!-- أيقونة شبكة الآيفون -->
+                    <div class="ios-signal">
+                        <div class="ios-signal-bar active"></div>
+                        <div class="ios-signal-bar active"></div>
+                        <div class="ios-signal-bar active"></div>
+                        <div class="ios-signal-bar"></div>
+                    </div>
+                </div>
+                <!-- الجهة اليمنى: اسم شركة الاتصالات mobily -->
+                <span class="status-carrier">mobily</span>
+            </div>
+
+            <!-- خط سحب مركز التحكم الشهير بآيفون أسفل الأيقونات مباشرة بالجهة اليسرى -->
+            <div class="control-grabber"></div>
+
+            <!-- حاوية التطبيقات وقفل الشاشة -->
+            <div class="app-container" id="appContainer">
+                
+                <!-- خلفية iOS 16 الأصلية الدائرية المتوهجة والمطابقة تماماً لصورتك مع رفع السطوع ببراعة تامة -->
+                <svg class="ios16-wallpaper" viewBox="0 0 375 812" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;">
+                    <defs>
+                        <!-- تدرج إضاءة الضوء العلوي الفضي/البنفسجي المعتم المرفوع السطوع -->
+                        <radialGradient id="topAmbient" cx="50%" cy="0%" r="75%">
+                            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+                            <stop offset="35%" stop-color="#ded4f5" stop-opacity="0.5"/>
+                            <stop offset="70%" stop-color="#181525" stop-opacity="0.2"/>
+                            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                        </radialGradient>
+                        
+                        <!-- تدرج إضاءة الضوء السفلي الأزرق السماوي/الفوسفوري المرفوع السطوع والوضوح -->
+                        <radialGradient id="bottomAmbient" cx="50%" cy="100%" r="75%">
+                            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.85"/>
+                            <stop offset="40%" stop-color="#02d6e4" stop-opacity="0.4"/>
+                            <stop offset="75%" stop-color="#071b26" stop-opacity="0.1"/>
+                            <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                        </radialGradient>
+                        
+                        <!-- تدرج حلقة النصف العلوي الفضية المشرقة -->
+                        <linearGradient id="topRingGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#e0d4f5" stop-opacity="0.15"/>
+                            <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8"/>
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0"/>
+                        </linearGradient>
+                        
+                        <!-- تدرج حلقة النصف السفلي الفوسفورية المشرقة -->
+                        <linearGradient id="bottomRingGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.25"/>
+                            <stop offset="50%" stop-color="#ffffff" stop-opacity="0.85"/>
+                            <stop offset="100%" stop-color="#ffffff" stop-opacity="1.0"/>
+                        </linearGradient>
+                        
+                        <!-- مرشحات التوهج النيوني المحسنة لزيادة السطوع والجمال للدوائر -->
+                        <filter id="glowFilterTop" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="4" result="blur1" />
+                            <feGaussianBlur stdDeviation="12" result="blur2" />
+                            <feMerge>
+                                <feMergeNode in="blur2" />
+                                <feMergeNode in="blur1" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                        
+                        <filter id="glowFilterBottom" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur stdDeviation="4.5" result="blur1" />
+                            <feGaussianBlur stdDeviation="15" result="blur2" />
+                            <feMerge>
+                                <feMergeNode in="blur2" />
+                                <feMergeNode in="blur1" />
+                                <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- لون أسود مطفي عميق جداً في المنتصف -->
+                    <rect width="375" height="812" fill="#040306"/>
+                    
+                    <!-- الإضاءات المحيطية الساطعة للـ Wallpaper -->
+                    <rect width="375" height="812" fill="url(#topAmbient)"/>
+                    <rect width="375" height="812" fill="url(#bottomAmbient)"/>
+                    
+                    <!-- الحلقة العلوية: سطوع كامل وتحسين دقيق -->
+                    <circle cx="187.5" cy="235" r="165" fill="none" stroke="url(#topRingGrad)" stroke-width="2.5" filter="url(#glowFilterTop)" opacity="0.95" />
+                    
+                    <!-- الحلقة السفلية: سطوع كامل وتحسين دقيق -->
+                    <circle cx="187.5" cy="565" r="165" fill="none" stroke="url(#bottomRingGrad)" stroke-width="3" filter="url(#glowFilterBottom)" opacity="1.0" />
+                </svg>
+
+                <!-- شاشة القفل: ساعة وتاريخ ذكيين متوافقين بالكامل مع نمط وأرقام الصورة -->
+                <div class="lock-screen-header">
+                    <div class="lock-date" id="lockDate">الأحد، 7 يونيو</div>
+                    <div class="lock-time" id="lockTime">--:--</div>
+                </div>
+
+                <!-- إشعار الوصول العائم الفاخر (دعوة م.جنى حريري - ينزلق ثانياً من الأعلى مباشرة بعد الخبر بشكل سريع) -->
+                <div class="notification-widget" id="notification">
+                    <div class="notif-header">
+                        <div class="app-info">
+                            <div class="app-icon">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+                            <span class="app-name">صحتنا</span>
+                        </div>
+                        <span class="notif-time">الآن</span>
+                    </div>
+
+                    <div>
+                        <h2 class="notif-title">دعوة خاصة لحضور المعرض</h2>
+                        <p class="notif-body">
+                            لديك دعوة لحضور معرض انجاز لمشاريع التخرج
+                        </p>
+                        <button class="view-btn" onclick="openApp()">
+                            عرض التفاصيل
+                        </button>
+                    </div>
+                </div>
+
+                <!-- إشعار الوصول الثاني (الخبر العاجل المتراص - ظاهر افتراضياً في لقطة البداية) -->
+                <div class="notification-widget breaking-news-widget visible" id="newsNotification">
+                    <div class="notif-header">
+                        <div class="app-info">
+                            <div class="app-icon">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+                            <!-- تعديل اسم جهة البث الإخباري إلى "اخبار" بدقة -->
+                            <span class="app-name">اخبار</span>
+                        </div>
+                        <!-- تم تغيير وقت وصول الخبر الإخباري من "الآن" إلى "(منذ اسبوع)" بناءً على طلبكِ بدقة -->
+                        <span class="notif-time">(منذ اسبوع)</span>
+                    </div>
+
+                    <div>
+                        <!-- إضافة جملة "تأهل مشروع صحتنا !" بجانب ترويسة خبر عاجل -->
+                        <h2 class="notif-title"><span class="pulse-indicator"></span>خبر عاجل: تأهل مشروع صحتنا !</h2>
+                        <p class="notif-body" style="font-weight: 700; color: #1a1a1a;">
+                            مشروع صحتنا يتأهل للمرحلة النهائية في مسابقة ٣ دقايق ضمن افضل 15 مشروع  من اصل 80 مشروع
+                        </p>
+                        <button class="view-btn" onclick="openNewsModal()">
+                            <i class="fa-solid fa-newspaper"></i> تكملة الخبر
+                        </button>
+                    </div>
+                </div>
+
+                <!-- لوح قراءة الأخبار المنسدل (iOS Bottom Sheet News Reader) -->
+                <div class="news-sheet-overlay" id="newsOverlay">
+                    <div class="news-sheet">
+                        <div class="drag-handle"></div>
+                        <div class="news-sheet-header">
+                            <span class="news-sheet-title">
+                                <i class="fa-solid fa-circle-exclamation" style="color: #d4af37;"></i> تقرير إخباري عاجل
+                            </span>
+                            <button class="news-sheet-close" onclick="closeNewsModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="news-sheet-content">
+                            <h2 class="news-article-title">
+                                عاجل: مشروع "صحتنا" يتأهل للمرحلة النهائية في مسابقة "3 دقائق" ضمن أفضل 15 مشروعاً
+                            </h2>
+                            
+                            <div class="news-metadata">
+                                <span>مكة المكرمة — تقرير صحفي</span>
+                                <span style="font-family: 'Inter', sans-serif;">2026/06/07</span>
+                            </div>
+
+                            <p class="news-paragraph">
+                                تأهل مشروع "صحتنا" إلى المرحلة النهائية في مسابقة "3 دقائق"، ليصبح ضمن أفضل 15 مشروعاً منافساً من أصل 80 مشروعاً مشاركاً.
+                            </p>
+
+                            <p class="news-paragraph">
+                                ويأتي هذا التأهل بعد تحقيق المشروع نجاحاً سابقاً بحصوله على المركز الأول كأفضل مشروع في معرض مشاريع تخرج (1) لقسم هندسة البرمجيات. ويقود هذا العمل فريق مكوّن من الطالبات: جمانه الشريف، ريناد فلاته, لمار السليماني، روابي الفليت، غلا المنتشري، وريماس حمود.
+                            </p>
+
+                            <p class="news-paragraph">
+                                وحظي الفريق بتوجيهات سديدة وإشراف متميز من الدكتور محمد جبلي، الذي كان لدعم الأكاديمي المستمر ومتابعته الدؤوبة الأثر الكبير في تطوير فكرة المشروع وتوجيه مهارات الطالبات نحو منصات التميز والمنافسة.
+                            </p>
+
+                            <p class="news-paragraph">
+                                وكانت كلية الحاسبات قد نشرت تهنئة رسمية للمشاريع المترشحة عبر حسابها، ويمكنكم الاطلاع عليها من خلال 
+                                <a class="twitter-direct-link" href="https://x.com/uqu_cc/status/2054825758816661589?s=46" target="_blank" onclick="handleInteractedAudioPlay()">
+                                    <i class="fa-brands fa-x-twitter"></i> هذا الرابط
+                                </a>.
+                            </p>
+
+                            <p class="news-paragraph">
+                                وفي تصريح خاص لفريق "صحتنا" بمناسبة هذا التأهل، عبّرت العضوات عن فخرهن بالوصول إلى هذه المرحلة، وأكّدن:
+                            </p>
+
+                            <div class="quote-block">
+                                "هذا التأهل هو ثمرة عمل جماعي متكامل وتوجيه مستمر من مشرفنا. ونحن متحمسات جداً لتقديم مشروعنا واستعراض تفاصيله في معرض إنجاز، لتوضيح كيف يمكن لـ 'صحتنا' أن يجعلك حقاً سنداً لأهلك من خلال التركيز على تسهيل تجربة المستخدم وبناء واجهات ذكية وسهلة تتيح رعاية صحة الوالدين والعائلة ومتابعتها عن بعد، حيث نطمح من خلاله إلى تقديم تقنيات مبتكرة تخدم المجتمع وتواكب التطور الرقمي."
+                            </div>
+
+                            <!-- عبارة التمني بالسداد والتوفيق المضافة بجمالية ومساحة مريحة -->
+                            <p class="news-paragraph" style="text-align: center; font-weight: 700; color: #006C35; margin-top: 15px; font-size: 14.5px;">
+                                متمنين لهم السداد والتوفيق 💚✨
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نافذة بطاقة الدعوة الزجاجية التفاعلية -->
+                <div class="invitation-wrapper">
+                    <div class="invitation-card" id="invitationCard">
+                        
+                        <!-- زر الرجوع والإغلاق -->
+                        <button class="close-btn" onclick="closeApp()">
+                            <i class="fas fa-times"></i>
+                        </button>
+
+                        <!-- محتويات الدعوة الرئيسية لـ أ.تهاني قدسي -->
+                        <div id="cardContent">
+                            <div class="card-header">
+                                <div class="app-icon" style="width: 50px; height: 50px; font-size: 22px; margin: 0 auto 10px; border-radius: 12px;">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+                                <h1>مشروع "صحتنا"</h1>
+                            </div>
+                            
+                            <div class="card-body">
+                                <p>
+                                    لأن صحة عائلتنا هي أغلى ما نملك، وعافيتهم هي الأمان الحقيقي...<br>
+                                    صممنا منصة "صحتنا"؛ لتكون لهم دائماً خير "سند".<br>
+                                    <br>
+                                    سعداء بدعوتكم الكريمة للاطلاع على ما أنجزناه ومشاركتنا هذا الشغف.
+                                </p>
+                            </div>
+
+                            <!-- تفاصيل المعرض المصغرة المحدثة بالوقت الجديد مع تباعد سفلي أكبر -->
+                            <div class="card-details">
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="far fa-calendar-alt"></i></div>
+                                    <span>الثلاثاء، 9 يونيو 2026</span>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="far fa-clock"></i></div>
+                                    <span>من 11:00 صباحاً - حتى 2:00 مساءً</span>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                    <span>جامعة أم القرى - قاعة الملك عبدالعزيز</span>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fas fa-store"></i></div>
+                                    <span>رقم البوث: <strong style="font-family: 'Inter', sans-serif; color: #006C35; font-size: 13.5px; letter-spacing: 0.5px;">HCI-F-7</strong></span>
+                                </div>
+                            </div>
+
+                            <button class="cta-btn" id="confirmBtn" onclick="confirmAttendance()">
+                                يسعدني الحضور ..قبول الدعوه
+                            </button>
+                        </div>
+
+                        <!-- حاوية رسالة النجاح والامتنان والترحيب بالمهندس مازن مع إيموجي النجوم البراقة -->
+                        <div id="successView">
+                            <i class="fas fa-check-circle"></i>
+                            <h2>نتطلع لرؤيتك ✨</h2>
+                        </div>
+
+                    </div>
+                </div>
+                
+                <!-- شريط تمرير آيفون السفلي التقليدي -->
+                <div class="home-indicator"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- مشغل نغمة الإشعار الافتراضي للهاتف (أخبار مكة) -->
+    <audio id="notificationSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/571/571-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- نغمة الدعوة المخصصة المرفوعة من قبل جمانه (170.mp3) -->
+    <audio id="invitationSound" preload="auto">
+        <source src="170.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // تتبع تفعيل الأصوات لتجنب قيود حماية المتصفحات
+        let hasInteracted = false;
+        let invitationSourceCreated = false;
+
+        // دالة تحويل الأرقام الإنجليزية إلى أرقام عربية وشرقية مطابقة للصورة بدقة
+        function toArabicNumerals(str) {
+            const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            return str.replace(/[0-9]/g, w => arabicDigits[+w]);
+        }
+
+        // دالة تحديث الوقت والتاريخ بشكل مستمر ومتناغم مع متصفحات الجوال
+        function updateClock() {
+            const now = new Date();
+            
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            
+            // تهيئة نظام الـ 12 ساعة
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            
+            // إضافة الصفر لتنسيق رقمين دائماً
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            
+            // تم تغيير الأرقام هنا لتكون بالإنجليزية للوقت كما طلبتِ تماماً (مثال: 8:39)
+            const timeStringEnglish = `${hours}:${minutes}`;
+            
+            const lockTimeEl = document.getElementById('lockTime');
+            const statusTimeEl = document.querySelector('.status-time');
+            
+            if (lockTimeEl) lockTimeEl.textContent = timeStringEnglish;
+            if (statusTimeEl) statusTimeEl.textContent = timeStringEnglish;
+
+            // تحديث التاريخ بصيغة "أحد ٧ يونيو" ليتطابق مع الصورة بالملي
+            const weekday = now.toLocaleDateString('ar-EG', { weekday: 'long' })
+                              .replace('الأحد', 'أحد')
+                              .replace('الإثنين', 'إثنين')
+                              .replace('الثلاثاء', 'ثلاثاء')
+                              .replace('الأربعاء', 'أربعاء')
+                              .replace('الخميس', 'خميس')
+                              .replace('الجمعة', 'جمعة')
+                              .replace('السبت', 'سبت');
+                              
+            const dayNum = toArabicNumerals(now.toLocaleDateString('ar-EG', { day: 'numeric' }));
+            const monthName = now.toLocaleDateString('ar-EG', { month: 'long' });
+            
+            const dateString = `${weekday} ${dayNum} ${monthName}`;
+            
+            const lockDateEl = document.getElementById('lockDate');
+            if (lockDateEl) {
+                lockDateEl.textContent = dateString;
+            }
+        }
+
+        // تحديث دائم للوقت والتاريخ
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // دالة تشغيل نغمة رنين الدعوة المرفوعة (170.mp3) بتضخيم الكسب الصوتي لأعلى درجة برمجياً (2.5x تضخيم)
+        function playCustomInvitationSound() {
+            try {
+                const audio = document.getElementById('invitationSound');
+                if (!audio) return;
+                
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext && !invitationSourceCreated) {
+                    try {
+                        const ctx = new AudioContext();
+                        const source = ctx.createMediaElementSource(audio);
+                        const gainNode = ctx.createGain();
+                        
+                        // تضخيم فائق مدهش برمجياً بمقدار 2.5X لرفع حد الصوت إلى أقصى طاقة ممكنة!
+                        gainNode.gain.setValueAtTime(2.5, ctx.currentTime); 
+                        source.connect(gainNode);
+                        gainNode.connect(ctx.destination);
+                        invitationSourceCreated = true;
+                        
+                        document.addEventListener('click', () => {
+                            if (ctx.state === 'suspended') ctx.resume();
+                        }, { once: false });
+                    } catch(err) {
+                        console.log("Web Audio routing bypass:", err);
+                    }
+                }
+                
+                audio.currentTime = 0;
+                audio.volume = 1.0; // أعلى جودة للتحكم اليدوي
+                audio.play().catch(e => {
+                    console.log("حظر المتصفح التشغيل التلقائي للصوت المخصص مؤقتاً لحين حدوث تفاعل.");
+                });
+            } catch (e) {
+                console.log("خطأ في تشغيل النغمة المخصصة: ", e);
+            }
+        }
+
+        // دالة تشغيل نغمة رنين آيفون الافتراضية والشهيرة (Tri-Tone) بدقة عالية مع تضخيم الصوت ورفع السطوع الصوتي للحد الأقصى (Gain = 1.2)
+        function playIphoneTriToneSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                const start = ctx.currentTime;
+                
+                const playBellNote = (freq, startTime, duration) => {
+                    const osc1 = ctx.createOscillator();
+                    osc1.type = 'sine';
+                    osc1.frequency.value = freq;
+                    
+                    const osc2 = ctx.createOscillator();
+                    osc2.type = 'triangle';
+                    osc2.frequency.value = freq * 2; 
+                    
+                    const gainNode = ctx.createGain();
+                    
+                    const filter = ctx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(freq * 3, startTime);
+                    
+                    // إشارة البدء والتأثير الديناميكي للنبضة الصوتية
+                    gainNode.gain.setValueAtTime(0, startTime);
+                    // تضخيم النغمة ورفع مستوى الصوت إلى 1.2 (تضخيم كامل فخم) لتكون قوية وواضحة جداً
+                    gainNode.gain.linearRampToValueAtTime(1.2, startTime + 0.01);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+                    
+                    osc1.connect(filter);
+                    osc2.connect(filter);
+                    filter.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+                    
+                    osc1.start(startTime);
+                    osc2.start(startTime);
+                    osc1.stop(startTime + duration);
+                    osc2.stop(startTime + duration);
+                };
+
+                // نغمات الآيفون الافتراضية التصاعدية المريحة والشهيرة Tri-Tone بشكل بأعلى كسب تفاعلي (G5 -> C6 -> E6)
+                playBellNote(783.99, start, 0.20);          
+                playBellNote(1046.50, start + 0.11, 0.20);  
+                playBellNote(1318.51, start + 0.22, 0.50);  
+            } catch (e) {
+                console.log("Audio play failed: ", e);
+            }
+        }
+
+        // دالة تشغيل صوت الإشعار ثنائي النغمة لرسائل الدردشة (للخبر الإخباري) مرفع القوة
+        function playMessageSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                
+                const playTone = (frequency, start, duration, volume = 0.5) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.value = frequency;
+                    
+                    gain.gain.setValueAtTime(volume, start);
+                    gain.gain.exponentialRampToValueAtTime(0.001, start + duration);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.start(start);
+                    osc.stop(start + duration);
+                };
+
+                // نغمة رنين ثنائية مريحة ومرتفعة القوة
+                playTone(880, now, 0.12, 0.5);       
+                playTone(1174.66, now + 0.10, 0.35, 0.4); 
+            } catch (e) {
+                console.log("تم كتم صوت الإشعار مؤقتاً لحين حدوث تفاعل.");
+            }
+        }
+
+        // دالة تشغيل الصوت التفاعلي الفخم عند النقر على الأزرار (حاكي للاهتزاز الحسي للآيفون - Premium Subtle Click)
+        function playClickSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                
+                osc.type = 'sine';
+                // تردد دافئ ومكتوم (160 هرتز) لمحاكاة نقرة هبتك دافئة ممتصة بالكامل
+                osc.frequency.setValueAtTime(160, ctx.currentTime); 
+                
+                gain.gain.setValueAtTime(0.18, ctx.currentTime);
+                // تضاؤل سريع للغاية (35 مللي ثانية) لمنع أي رنين مزعج
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035); 
+                
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                
+                osc.start(ctx.currentTime);
+                osc.stop(ctx.currentTime + 0.035);
+            } catch(e) {
+                console.error("Audio click play failed", e);
+            }
+        }
+
+        // دالة تفعيل الصوت عند أول تفاعل حقيقي وتخطي قيود حماية المتصفح
+        function handleInteractedAudioPlay() {
+            playClickSound();
+            if (!hasInteracted) {
+                hasInteracted = true;
+            }
+        }
+
+        // تسلسل انزلاق الإشعارات بشكل سريع وانسيابي رائع فور تحميل الصفحة
+        window.addEventListener('load', () => {
+            // تفعيل حالة استيقاظ الجوال الأساسية مباشرة
+            document.body.classList.add('phone-awake');
+
+            // 1. إطلاق صوت إشعار "أخبار كلية الحاسبات" فوراً بعد 200 مللي ثانية فقط
+            setTimeout(() => {
+                playMessageSound();
+            }, 200);
+
+            // 2. انزلاق إشعار "الدعوة الخاصة لـ م.مازن مليباري" فوراً (بعد 550 مللي ثانية) ببطء وسلاسة تامة من الأعلى بصوت نغمتك المخصصة 170.mp3
+            setTimeout(() => {
+                const mainNotif = document.getElementById('notification');
+                if (mainNotif) {
+                    mainNotif.classList.add('visible');
+                }
+                playIphoneTriToneSound(); // النغمة بصوت مرتفع جداً وواضح
+                playCustomInvitationSound(); // تشغيل النغمة المخصصة أيضاً بحدها الأقصى للتضخيم الصوتي
+            }, 550); 
+        });
+
+        // تشغيل مستمع الصوت الاحتياطي لمجرد قيام المستخدم بالنقر في أي مكان في الصفحة أول مرة
+        document.addEventListener('click', () => {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                // تفعيل ملفات الصوت لتكون جاهزة للتشغيل الفوري عند الطلب وبأعلى طاقة
+                const customAudio = document.getElementById('invitationSound');
+                if (customAudio) {
+                    customAudio.load();
+                }
+                playClickSound();
+            }
+        }, { once: false });
+
+        // فتح التطبيق والانتقال للمشهد الثاني بسلاسة
+        function openApp() {
+            handleInteractedAudioPlay();
+            const container = document.getElementById('appContainer');
+            if (container) {
+                container.classList.add('app-open');
+            }
+        }
+
+        // إغلاق التطبيق والعودة لشاشة القفل مع إعادة تهيئة البطاقة
+        function closeApp() {
+            handleInteractedAudioPlay();
+            const container = document.getElementById('appContainer');
+            if (container) {
+                container.classList.remove('app-open');
+            }
+            
+            setTimeout(() => {
+                const content = document.getElementById('cardContent');
+                const successView = document.getElementById('successView');
+                if (content) content.style.display = 'block';
+                if (successView) {
+                    successView.style.display = 'none';
+                }
+            }, 650);
+        }
+
+        // دالة فتح لوحة الأخبار العاجلة المنسدلة
+        function openNewsModal() {
+            handleInteractedAudioPlay();
+            const overlay = document.getElementById('newsOverlay');
+            if (overlay) {
+                overlay.classList.add('active');
+            }
+        }
+
+        // دالة إغلاق لوحة الأخبار العاجلة المنسدلة
+        function closeNewsModal() {
+            handleInteractedAudioPlay();
+            const overlay = document.getElementById('newsOverlay');
+            if (overlay) {
+                overlay.classList.remove('active');
+            }
+        }
+
+        // دالة تأكيد وقبول دعوة أ.تهاني قدسي مع إطلاق نغمات ومؤثرات الاحتفال
+        function confirmAttendance() {
+            playSuccessSound();
+            triggerConfettiEffect();
+
+            const content = document.getElementById('cardContent');
+            const successView = document.getElementById('successView');
+
+            if (content) content.style.display = 'none';
+            if (successView) successView.style.display = 'flex';
+        }
+
+        // دالة إنتاج صوت تأكيد متناغم رائع (Success Harmony Chime)
+        function playSuccessSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                
+                const ctx = new AudioContext();
+                
+                const playNote = (frequency, startTime, duration, volume = 0.08) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.type = 'sine';
+                    osc.frequency.value = frequency;
+                    
+                    gain.gain.setValueAtTime(volume, startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+                    
+                    osc.start(startTime);
+                    osc.stop(startTime + duration);
+                };
+
+                const now = ctx.currentTime;
+                // نغمات تصاعدية مبهجة تعبر عن الابتهاج والسند
+                playNote(523.25, now, 0.15); // نغمة أولى C5
+                playNote(659.25, now + 0.08, 0.15); // نغمة ثانية E5
+                playNote(783.99, now + 0.16, 0.20); // نغمة ثالثة G5
+                playNote(1046.50, now + 0.24, 0.45); // نغمة الذروة C6
+            } catch (e) {
+                console.error("Success sound play failed", e);
+            }
+        }
+
+        // إطلاق جزيئات متطايرة وبتلات ذهبية دافئة داخل شاشة الجوال لإعطاء تغذية تفاعلية ممتازة
+        function triggerConfettiEffect() {
+            const screen = document.getElementById('screenView');
+            if (!screen) return;
+
+            // ألوان الذهبي، والبرتقالي، والأخضر المنسجمة مع الهوية المطلوبة
+            const colors = ['#d4af37', '#27ae60', '#f1c40f', '#e67e22', '#1abc9c', '#2ecc71'];
+            const particleCount = 45;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'confetti-particle';
+                
+                // بدء التدفق من موقع زر قبول الدعوة بالأسفل
+                const startX = 130 + (Math.random() * 110);
+                const startY = 600 + (Math.random() * 60);
+                
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
+                
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.backgroundColor = color;
+                
+                // أحجام متباينة للجزيئات
+                const size = 5 + (Math.random() * 7);
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 2 + (Math.random() * 5);
+                const velocityX = Math.cos(angle) * velocity;
+                const velocityY = -Math.abs(Math.sin(angle) * velocity) - 1.5; // توجيه الدفع للأعلى دوماً
+                
+                screen.appendChild(particle);
+
+                let currentX = startX;
+                let currentY = startY;
+                let opacity = 1;
+                let age = 0;
+                const maxAge = 55 + Math.random() * 45;
+
+                const animateParticle = () => {
+                    if (age >= maxAge) {
+                        particle.remove();
+                        return;
+                    }
+                    
+                    age++;
+                    // مسار حركي انسيابي متأثر بالجاذبية الوهمية
+                    currentX += velocityX * 0.95;
+                    currentY += velocityY + (age * 0.11); 
+                    opacity = 1 - (age / maxAge);
+                    
+                    particle.style.left = currentX + 'px';
+                    particle.style.top = currentY + 'px';
+                    particle.style.opacity = opacity;
+                    particle.style.transform = `rotate(${age * 4.5}deg)`;
+
+                    requestAnimationFrame(animateParticle);
+                };
+
+                requestAnimationFrame(animateParticle);
+            }
+        }
+    </script>
+
+</body>
+</html>
