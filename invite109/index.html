@@ -284,7 +284,7 @@
             font-weight: 700; /* وزن عريض أصلي وجذاب للآيفون */
             line-height: 1;
             letter-spacing: -1.5px;
-            color: #ffffff; /* أبيض ناصع نقي كما في رغبتك */
+            color: #ffffff; /* أبيض ناصع نقي */
             opacity: 0.98;
             /* تأثير إسقاط ظلال ناعمة ودقيقة لمنح الساعة بعداً وعمقاً فائري الجودة وفصلها عن الخلفية */
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -307,7 +307,7 @@
             padding-left: 18px;
             padding-right: 18px;
             
-            /* حالة الاختفاء المتقلصة قبل الوصول للإشعار الرئيسي - يبدأ من الأعلى جداً لمحاكاة النزول السلس السريع */
+            /* حالة الاختفاء المتقلصة قبل الوصول للإشعار الرئيسي */
             opacity: 0;
             max-height: 0;
             padding-top: 0;
@@ -531,7 +531,7 @@
 
         /* حاوية محتوى التقرير الصحفي المنسدل */
         .news-sheet-content {
-            padding: 20px 20px 85px 20px; /* تم إضافة زيادة حشوة سفلية بمقدار 85px لترك مسافة مريحة ممتازة تحت النص */
+            padding: 20px 20px 85px 20px; /* زيادة حشوة سفلية لترك مسافة مريحة ممتاز تحت النص */
             overflow-y: auto;
             flex-grow: 1;
             display: flex;
@@ -539,7 +539,7 @@
             gap: 16px;
         }
 
-        /* ترويسة الخبر الصحفي الفخم */
+        /* ترويسة الخبر الصحفي */
         .news-article-title {
             font-size: 17px;
             font-weight: 800;
@@ -625,7 +625,7 @@
             backdrop-filter: blur(40px);
             -webkit-backdrop-filter: blur(40px);
             border-radius: 28px;
-            padding: 38px 20px 42px; /* تم زيادة المسافة السفلية للبطاقة من 24px إلى 42px كمسافة أمان مريحة */
+            padding: 38px 20px 42px; /* مسافة أمان مريحة */
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.7);
             position: relative;
@@ -683,7 +683,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            margin-bottom: 24px; /* تم زيادة الهامش السفلي هنا من 4px إلى 24px لخلق مسافة مريحة مع الزر */
+            margin-bottom: 24px; /* مسافة مريحة مع الزر */
             border: 1px solid rgba(0, 108, 53, 0.08);
         }
 
@@ -927,7 +927,7 @@
                     <div class="lock-time" id="lockTime">--:--</div>
                 </div>
 
-                <!-- إشعار الوصول العائم الفاخر (دعوة م.جنى حريري - ينزلق ثانياً من الأعلى مباشرة بعد الخبر بشكل سريع) -->
+                <!-- إشعار الوصول العائم الفاخر (دعوة أ.تهاني قدسي) -->
                 <div class="notification-widget" id="notification">
                     <div class="notif-header">
                         <div class="app-info">
@@ -940,9 +940,9 @@
                     </div>
 
                     <div>
-                        <h2 class="notif-title">دعوة خاصة | م.غدي سمكري</h2>
+                        <h2 class="notif-title">دعوة خاصة | أ.تهاني قدسي</h2>
                         <p class="notif-body">
-                            لديك دعوة لحضور معرض انجاز لمشاريع التخرج
+                            لديكِ دعوة لحضور معرض إنجاز لمشاريع التخرج
                         </p>
                         <button class="view-btn" onclick="openApp()">
                             عرض التفاصيل
@@ -950,22 +950,19 @@
                     </div>
                 </div>
 
-                <!-- إشعار الوصول الثاني (الخبر العاجل المتراص - ظاهر افتراضياً في لقطة البداية) -->
+                <!-- إشعار الوصول الثاني (الخبر العاجل المتراص) -->
                 <div class="notification-widget breaking-news-widget visible" id="newsNotification">
                     <div class="notif-header">
                         <div class="app-info">
                             <div class="app-icon">
                                 <i class="fa-solid fa-bullhorn"></i>
                             </div>
-                            <!-- تعديل اسم جهة البث الإخباري إلى "اخبار" بدقة -->
                             <span class="app-name">اخبار</span>
                         </div>
-                        <!-- تم تغيير وقت وصول الخبر الإخباري من "الآن" إلى "(منذ اسبوع)" بناءً على طلبكِ بدقة -->
                         <span class="notif-time">(منذ اسبوع)</span>
                     </div>
 
                     <div>
-                        <!-- إضافة جملة "تأهل مشروع صحتنا !" بجانب ترويسة خبر عاجل -->
                         <h2 class="notif-title"><span class="pulse-indicator"></span>خبر عاجل: تأهل مشروع صحتنا !</h2>
                         <p class="notif-body" style="font-weight: 700; color: #1a1a1a;">
                             مشروع صحتنا يتأهل للمرحلة النهائية في مسابقة ٣ دقايق ضمن افضل 15 مشروع  من اصل 80 مشروع
@@ -1026,7 +1023,6 @@
                                 "هذا التأهل هو ثمرة عمل جماعي متكامل وتوجيه مستمر من مشرفنا. ونحن متحمسات جداً لتقديم مشروعنا واستعراض تفاصيله في معرض إنجاز، لتوضيح كيف يمكن لـ 'صحتنا' أن يجعلك حقاً سنداً لأهلك من خلال التركيز على تسهيل تجربة المستخدم وبناء واجهات ذكية وسهلة تتيح رعاية صحة الوالدين والعائلة ومتابعتها عن بعد، حيث نطمح من خلاله إلى تقديم تقنيات مبتكرة تخدم المجتمع وتواكب التطور الرقمي."
                             </div>
 
-                            <!-- عبارة التمني بالسداد والتوفيق المضافة بجمالية ومساحة مريحة -->
                             <p class="news-paragraph" style="text-align: center; font-weight: 700; color: #006C35; margin-top: 15px; font-size: 14.5px;">
                                 متمنين لهم السداد والتوفيق 💚✨
                             </p>
@@ -1043,7 +1039,7 @@
                             <i class="fas fa-times"></i>
                         </button>
 
-                        <!-- محتويات الدعوة الرئيسية لـ أ.تهاني قدسي -->
+                        <!-- محتويات الدعوة الرئيسية لـ أ.تهاني قدسي ورقم البوث الجديد -->
                         <div id="cardContent">
                             <div class="card-header">
                                 <div class="app-icon" style="width: 50px; height: 50px; font-size: 22px; margin: 0 auto 10px; border-radius: 12px;">
@@ -1057,12 +1053,12 @@
                                     لأن صحة عائلتنا هي أغلى ما نملك، وعافيتهم هي الأمان الحقيقي...<br>
                                     صممنا منصة "صحتنا"؛ لتكون لهم دائماً خير "سند".<br>
                                     <br>
-                                    سعداء بدعوتك <strong>م.غدي سمكري</strong><br>
+                                    سعداء بدعوتكِ <strong>أ.تهاني قدسي</strong><br>
                                     للاطلاع على ما أنجزناه ومشاركتنا هذا الشغف.
                                 </p>
                             </div>
 
-                            <!-- تفاصيل المعرض المصغرة المحدثة بالوقت الجديد مع تباعد سفلي أكبر -->
+                            <!-- تفاصيل المعرض المصغرة المشتملة على رقم البوث -->
                             <div class="card-details">
                                 <div class="detail-item">
                                     <div class="detail-icon"><i class="far fa-calendar-alt"></i></div>
@@ -1078,19 +1074,19 @@
                                 </div>
                                 <div class="detail-item">
                                     <div class="detail-icon"><i class="fas fa-store"></i></div>
-                                    <span>رقم البوث: <strong style="font-family: 'Inter', sans-serif; color: #006C35; font-size: 13.5px; letter-spacing: 0.5px;">HCI-F-7</strong></span>
+                                    <span>رقم البوث: <strong style="font-family: 'Inter', sans-serif; color: #006C35;">HCI-F-7</strong></span>
                                 </div>
                             </div>
 
                             <button class="cta-btn" id="confirmBtn" onclick="confirmAttendance()">
-                                يسعدني الحضور ..قبول الدعوه
+                                يسعدني الحضور .. قبول الدعوة
                             </button>
                         </div>
 
-                        <!-- حاوية رسالة النجاح والامتنان والترحيب بالمهندس مازن مع إيموجي النجوم البراقة -->
+                        <!-- حاوية رسالة النجاح -->
                         <div id="successView">
                             <i class="fas fa-check-circle"></i>
-                            <h2>نتطلع لرؤيتك ✨</h2>
+                            <h2>نتطلع لرؤيتكِ ✨</h2>
                         </div>
 
                     </div>
@@ -1137,7 +1133,6 @@
             // إضافة الصفر لتنسيق رقمين دائماً
             minutes = minutes < 10 ? '0' + minutes : minutes;
             
-            // تم تغيير الأرقام هنا لتكون بالإنجليزية للوقت كما طلبتِ تماماً (مثال: 8:39)
             const timeStringEnglish = `${hours}:${minutes}`;
             
             const lockTimeEl = document.getElementById('lockTime');
@@ -1146,7 +1141,7 @@
             if (lockTimeEl) lockTimeEl.textContent = timeStringEnglish;
             if (statusTimeEl) statusTimeEl.textContent = timeStringEnglish;
 
-            // تحديث التاريخ بصيغة "أحد ٧ يونيو" ليتطابق مع الصورة بالملي
+            // تحديث التاريخ بصيغة "أحد ٧ يونيو"
             const weekday = now.toLocaleDateString('ar-EG', { weekday: 'long' })
                               .replace('الأحد', 'أحد')
                               .replace('الإثنين', 'إثنين')
@@ -1171,7 +1166,7 @@
         updateClock();
         setInterval(updateClock, 1000);
 
-        // دالة تشغيل نغمة رنين الدعوة المرفوعة (170.mp3) بتضخيم الكسب الصوتي لأعلى درجة برمجياً (2.5x تضخيم)
+        // دالة تشغيل نغمة رنين الدعوة المرفوعة (170.mp3) بتضخيم الكسب الصوتي لأعلى درجة برمجياً
         function playCustomInvitationSound() {
             try {
                 const audio = document.getElementById('invitationSound');
@@ -1184,7 +1179,6 @@
                         const source = ctx.createMediaElementSource(audio);
                         const gainNode = ctx.createGain();
                         
-                        // تضخيم فائق مدهش برمجياً بمقدار 2.5X لرفع حد الصوت إلى أقصى طاقة ممكنة!
                         gainNode.gain.setValueAtTime(2.5, ctx.currentTime); 
                         source.connect(gainNode);
                         gainNode.connect(ctx.destination);
@@ -1199,16 +1193,16 @@
                 }
                 
                 audio.currentTime = 0;
-                audio.volume = 1.0; // أعلى جودة للتحكم اليدوي
+                audio.volume = 1.0;
                 audio.play().catch(e => {
-                    console.log("حظر المتصفح التشغيل التلقائي للصوت المخصص مؤقتاً لحين حدوث تفاعل.");
+                    console.log("حظر التشغيل التلقائي للصوت مؤقتاً لحين تفاعل المستخدم.");
                 });
             } catch (e) {
                 console.log("خطأ في تشغيل النغمة المخصصة: ", e);
             }
         }
 
-        // دالة تشغيل نغمة رنين آيفون الافتراضية والشهيرة (Tri-Tone) بدقة عالية مع تضخيم الصوت ورفع السطوع الصوتي للحد الأقصى (Gain = 1.2)
+        // دالة تشغيل نغمة رنين آيفون الافتراضية والشهيرة (Tri-Tone)
         function playIphoneTriToneSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1232,9 +1226,7 @@
                     filter.type = 'lowpass';
                     filter.frequency.setValueAtTime(freq * 3, startTime);
                     
-                    // إشارة البدء والتأثير الديناميكي للنبضة الصوتية
                     gainNode.gain.setValueAtTime(0, startTime);
-                    // تضخيم النغمة ورفع مستوى الصوت إلى 1.2 (تضخيم كامل فخم) لتكون قوية وواضحة جداً
                     gainNode.gain.linearRampToValueAtTime(1.2, startTime + 0.01);
                     gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
                     
@@ -1249,16 +1241,15 @@
                     osc2.stop(startTime + duration);
                 };
 
-                // نغمات الآيفون الافتراضية التصاعدية المريحة والشهيرة Tri-Tone بشكل بأعلى كسب تفاعلي (G5 -> C6 -> E6)
                 playBellNote(783.99, start, 0.20);          
                 playBellNote(1046.50, start + 0.11, 0.20);  
                 playBellNote(1318.51, start + 0.22, 0.50);  
             } catch (e) {
-                console.log("Audio play failed: ", e);
+                console.log("فشل تشغيل الصوت: ", e);
             }
         }
 
-        // دالة تشغيل صوت الإشعار ثنائي النغمة لرسائل الدردشة (للخبر الإخباري) مرفع القوة
+        // دالة تشغيل صوت الإشعار ثنائي النغمة
         function playMessageSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1284,15 +1275,14 @@
                     osc.stop(start + duration);
                 };
 
-                // نغمة رنين ثنائية مريحة ومرتفعة القوة
                 playTone(880, now, 0.12, 0.5);       
                 playTone(1174.66, now + 0.10, 0.35, 0.4); 
             } catch (e) {
-                console.log("تم كتم صوت الإشعار مؤقتاً لحين حدوث تفاعل.");
+                console.log("تم كتم الصوت مؤقتاً لحين حدوث تفاعل.");
             }
         }
 
-        // دالة تشغيل الصوت التفاعلي الفخم عند النقر على الأزرار (حاكي للاهتزاز الحسي للآيفون - Premium Subtle Click)
+        // دالة نقرة هبتك دافئة ممتصة بالكامل
         function playClickSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1303,11 +1293,9 @@
                 const gain = ctx.createGain();
                 
                 osc.type = 'sine';
-                // تردد دافئ ومكتوم (160 هرتز) لمحاكاة نقرة هبتك دافئة ممتصة بالكامل
                 osc.frequency.setValueAtTime(160, ctx.currentTime); 
                 
                 gain.gain.setValueAtTime(0.18, ctx.currentTime);
-                // تضاؤل سريع للغاية (35 مللي ثانية) لمنع أي رنين مزعج
                 gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035); 
                 
                 osc.connect(gain);
@@ -1316,11 +1304,10 @@
                 osc.start(ctx.currentTime);
                 osc.stop(ctx.currentTime + 0.035);
             } catch(e) {
-                console.error("Audio click play failed", e);
+                console.error("فشل في تشغيل صوت النقر الملموس", e);
             }
         }
 
-        // دالة تفعيل الصوت عند أول تفاعل حقيقي وتخطي قيود حماية المتصفح
         function handleInteractedAudioPlay() {
             playClickSound();
             if (!hasInteracted) {
@@ -1330,30 +1317,27 @@
 
         // تسلسل انزلاق الإشعارات بشكل سريع وانسيابي رائع فور تحميل الصفحة
         window.addEventListener('load', () => {
-            // تفعيل حالة استيقاظ الجوال الأساسية مباشرة
             document.body.classList.add('phone-awake');
 
-            // 1. إطلاق صوت إشعار "أخبار كلية الحاسبات" فوراً بعد 200 مللي ثانية فقط
+            // 1. إطلاق صوت إشعار أخبار كلية الحاسبات فوراً
             setTimeout(() => {
                 playMessageSound();
             }, 200);
 
-            // 2. انزلاق إشعار "الدعوة الخاصة لـ م.مازن مليباري" فوراً (بعد 550 مللي ثانية) ببطء وسلاسة تامة من الأعلى بصوت نغمتك المخصصة 170.mp3
+            // 2. انزلاق إشعار الدعوة الخاصة لـ م.مازن مليباري
             setTimeout(() => {
                 const mainNotif = document.getElementById('notification');
                 if (mainNotif) {
                     mainNotif.classList.add('visible');
                 }
-                playIphoneTriToneSound(); // النغمة بصوت مرتفع جداً وواضح
-                playCustomInvitationSound(); // تشغيل النغمة المخصصة أيضاً بحدها الأقصى للتضخيم الصوتي
+                playIphoneTriToneSound();
+                playCustomInvitationSound();
             }, 550); 
         });
 
-        // تشغيل مستمع الصوت الاحتياطي لمجرد قيام المستخدم بالنقر في أي مكان في الصفحة أول مرة
         document.addEventListener('click', () => {
             if (!hasInteracted) {
                 hasInteracted = true;
-                // تفعيل ملفات الصوت لتكون جاهزة للتشغيل الفوري عند الطلب وبأعلى طاقة
                 const customAudio = document.getElementById('invitationSound');
                 if (customAudio) {
                     customAudio.load();
@@ -1362,7 +1346,7 @@
             }
         }, { once: false });
 
-        // فتح التطبيق والانتقال للمشهد الثاني بسلاسة
+        // فتح التطبيق والانتقال للمشهد الثاني
         function openApp() {
             handleInteractedAudioPlay();
             const container = document.getElementById('appContainer');
@@ -1371,7 +1355,7 @@
             }
         }
 
-        // إغلاق التطبيق والعودة لشاشة القفل مع إعادة تهيئة البطاقة
+        // إغلاق التطبيق والعودة لشاشة القفل
         function closeApp() {
             handleInteractedAudioPlay();
             const container = document.getElementById('appContainer');
@@ -1389,7 +1373,7 @@
             }, 650);
         }
 
-        // دالة فتح لوحة الأخبار العاجلة المنسدلة
+        // فتح لوحة الأخبار العاجلة المنسدلة
         function openNewsModal() {
             handleInteractedAudioPlay();
             const overlay = document.getElementById('newsOverlay');
@@ -1398,7 +1382,7 @@
             }
         }
 
-        // دالة إغلاق لوحة الأخبار العاجلة المنسدلة
+        // إغلاق لوحة الأخبار العاجلة المنسدلة
         function closeNewsModal() {
             handleInteractedAudioPlay();
             const overlay = document.getElementById('newsOverlay');
@@ -1407,7 +1391,7 @@
             }
         }
 
-        // دالة تأكيد وقبول دعوة أ.تهاني قدسي مع إطلاق نغمات ومؤثرات الاحتفال
+        // قبول دعوة أ.تهاني قدسي
         function confirmAttendance() {
             playSuccessSound();
             triggerConfettiEffect();
@@ -1419,7 +1403,7 @@
             if (successView) successView.style.display = 'flex';
         }
 
-        // دالة إنتاج صوت تأكيد متناغم رائع (Success Harmony Chime)
+        // دالة إنتاج صوت تأكيد متناغم رائع
         function playSuccessSound() {
             try {
                 const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -1445,22 +1429,20 @@
                 };
 
                 const now = ctx.currentTime;
-                // نغمات تصاعدية مبهجة تعبر عن الابتهاج والسند
-                playNote(523.25, now, 0.15); // نغمة أولى C5
-                playNote(659.25, now + 0.08, 0.15); // نغمة ثانية E5
-                playNote(783.99, now + 0.16, 0.20); // نغمة ثالثة G5
-                playNote(1046.50, now + 0.24, 0.45); // نغمة الذروة C6
+                playNote(523.25, now, 0.15); 
+                playNote(659.25, now + 0.08, 0.15); 
+                playNote(783.99, now + 0.16, 0.20); 
+                playNote(1046.50, now + 0.24, 0.45); 
             } catch (e) {
-                console.error("Success sound play failed", e);
+                console.error("فشل في تشغيل نغمة النجاح", e);
             }
         }
 
-        // إطلاق جزيئات متطايرة وبتلات ذهبية دافئة داخل شاشة الجوال لإعطاء تغذية تفاعلية ممتازة
+        // إطلاق جزيئات متطايرة وبتلات ذهبية دافئة داخل شاشة الجوال
         function triggerConfettiEffect() {
             const screen = document.getElementById('screenView');
             if (!screen) return;
 
-            // ألوان الذهبي، والبرتقالي، والأخضر المنسجمة مع الهوية المطلوبة
             const colors = ['#d4af37', '#27ae60', '#f1c40f', '#e67e22', '#1abc9c', '#2ecc71'];
             const particleCount = 45;
 
@@ -1468,7 +1450,6 @@
                 const particle = document.createElement('div');
                 particle.className = 'confetti-particle';
                 
-                // بدء التدفق من موقع زر قبول الدعوة بالأسفل
                 const startX = 130 + (Math.random() * 110);
                 const startY = 600 + (Math.random() * 60);
                 
@@ -1478,7 +1459,6 @@
                 const color = colors[Math.floor(Math.random() * colors.length)];
                 particle.style.backgroundColor = color;
                 
-                // أحجام متباينة للجزيئات
                 const size = 5 + (Math.random() * 7);
                 particle.style.width = size + 'px';
                 particle.style.height = size + 'px';
@@ -1486,7 +1466,7 @@
                 const angle = Math.random() * Math.PI * 2;
                 const velocity = 2 + (Math.random() * 5);
                 const velocityX = Math.cos(angle) * velocity;
-                const velocityY = -Math.abs(Math.sin(angle) * velocity) - 1.5; // توجيه الدفع للأعلى دوماً
+                const velocityY = -Math.abs(Math.sin(angle) * velocity) - 1.5; 
                 
                 screen.appendChild(particle);
 
@@ -1503,7 +1483,6 @@
                     }
                     
                     age++;
-                    // مسار حركي انسيابي متأثر بالجاذبية الوهمية
                     currentX += velocityX * 0.95;
                     currentY += velocityY + (age * 0.11); 
                     opacity = 1 - (age / maxAge);
@@ -1520,6 +1499,5 @@
             }
         }
     </script>
-
 </body>
 </html>
